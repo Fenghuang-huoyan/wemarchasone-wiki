@@ -1,13 +1,13 @@
 ---
 title: "Privacy — We March as One Guide"
-description: "Privacy for wemarchasone.wiki, the unofficial We March as One fan guide. Static pages, no accounts, no Google Analytics yet, and an Adsterra Native Banner for this domain only."
+description: "Privacy for wemarchasone.wiki, the unofficial We March as One fan guide. Static pages, no accounts, GA4 G-SDWYYDDBP3 on content pages, and an Adsterra Native Banner for this domain only."
 h1: "Privacy for the We March as One guide"
 section: "Privacy"
 order: 11
-verifiedAgainst: "Site policy for wemarchasone.wiki as published in this repository. analytics.gaId still empty; Adsterra Native Banner enabled with this domain's Get Code."
+verifiedAgainst: "Site policy for wemarchasone.wiki as published in this repository. GA4 G-SDWYYDDBP3 and Adsterra Native Banner enabled with this domain's Get Code."
 quickAnswer:
   - "wemarchasone.wiki is a static fan guide for We March as One. It has no accounts and does not ask for a Steam login."
-  - "analytics.gaId is an empty string, so Google Analytics is not loaded."
+  - "GA4 G-SDWYYDDBP3 loads on content pages. analytics.gaId is set to that measurement id."
   - "The Adsterra Native Banner after Quick Answer is enabled for this domain only. Zone id 2ce34bb053b2611ca5a433bb647292e7 loads from https://bauval.org/21/2ce34bb053b2611ca5a433bb647292e7."
   - "The same note is in the footer of every page. The legal disclaimer is a separate page."
 sources:
@@ -36,14 +36,14 @@ Pages you request are served as ordinary documents. This repository does not add
 
 ## Analytics
 
-`analytics.gaId` is an empty string. The base layout loads a Google tag only when that string is non-empty, so this build does not load Google Analytics.
+GA4 `G-SDWYYDDBP3` is set in `analytics.gaId`. The base layout loads that tag on content pages.
 
 ## Advertising
 
 The Native Banner slot after the quick answer is **on** for wemarchasone.wiki. Zone id `2ce34bb053b2611ca5a433bb647292e7` loads from `https://bauval.org/21/2ce34bb053b2611ca5a433bb647292e7` on the homepage and guide pages. No advertising script from another game is included. Adult and sensitive categories stay off. The 404 page does not render a slot.
 
 <Callout kind="note" title="This domain only">
-When a measurement id is added later, it has to be created for wemarchasone.wiki. This repository does not carry a measurement id or an ad zone from any other game site.
+The measurement id and ad zone on this site were created for wemarchasone.wiki. This repository does not carry a measurement id or an ad zone from any other game site.
 </Callout>
 
 Steam links in the footer are ordinary outbound links. Steam’s own site sets its own cookies once you leave this one. The support address playwemarchasone@gmail.com is the address printed on the Steam page. Mail there is not received by this wiki.
