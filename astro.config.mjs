@@ -18,11 +18,34 @@ function sitemapXmlAlias() {
   };
 }
 
+/* article.guide keeps overflow:hidden so the banner follows the card radius.
+   That clips a markdown table wider than the column, so wrap each table. */
+function rehypeWrapTables() {
+  const visit = (node) => {
+    const children = node?.children;
+    if (!children) return;
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i];
+      if (child.type === 'element' && child.tagName === 'table') {
+        children[i] = {
+          type: 'element',
+          tagName: 'div',
+          properties: { className: ['table-scroll'], tabIndex: 0 },
+          children: [child],
+        };
+      } else {
+        visit(child);
+      }
+    }
+  };
+  return (tree) => visit(tree);
+}
+
 // `@site` follows sites/active, a symlink to the game this repo publishes.
 export default defineConfig({
   site: 'https://wemarchasone.wiki',
   trailingSlash: 'never',
-  integrations: [mdx(), sitemap(), sitemapXmlAlias()],
+  integrations: [mdx({ rehypePlugins: [rehypeWrapTables] }), sitemap(), sitemapXmlAlias()],
   vite: {
     plugins: [tailwindcss()],
     resolve: {
