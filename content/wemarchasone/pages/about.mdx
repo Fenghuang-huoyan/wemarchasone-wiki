@@ -9,7 +9,7 @@ quickAnswer:
   - "We March as One Guide is a fan site at https://wemarchasone.wiki. It is not affiliated with dux, Valve, or Steam."
   - "Pages are English on purpose. Steam lists English only. The name on the site is always the full title, We March as One."
   - "Artwork is official Steam store art for AppID 5189160, with a credit file beside the images. The favicon is an original mark drawn for this site."
-  - "analytics.gaId is still empty, so Google Analytics is not loaded. The Adsterra Native Banner after Quick Answer is enabled for this domain only. There is no redeem-code page."
+  - "GA4 G-SDWYYDDBP3 loads on content pages. The Adsterra Native Banner after Quick Answer is enabled for this domain only. There is no redeem-code page."
 sources:
   - label: "Steam store — We March as One"
     url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
@@ -49,7 +49,7 @@ Library hero, library capsule, hero capsule, the store header, the capsules, and
 
 ## Privacy and ads
 
-`analytics.gaId` is an empty string. The base layout does not load Google Analytics.
+GA4 `G-SDWYYDDBP3` is set in `analytics.gaId`. The base layout loads that tag on content pages.
 
 The Adsterra Native Banner slot named `afterQuickAnswer` is enabled for wemarchasone.wiki. Zone id `2ce34bb053b2611ca5a433bb647292e7` loads from `https://bauval.org/21/2ce34bb053b2611ca5a433bb647292e7` on the homepage and guide pages. No advertising script from another game is included. Adult and sensitive categories stay off. The 404 page does not render a slot.
 

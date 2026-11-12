@@ -17,7 +17,7 @@ export const siteConfig = {
   homeDescription:
     'Unofficial English guide to We March as One (Steam AppID 5189160). dux’s incremental auto battler, still coming soon for Nov 13, 2026. Paint troops, gold, and the skill tree in the store’s own words. Not affiliated with dux or Valve.',
   analytics: {
-    gaId: '',
+    gaId: 'G-SDWYYDDBP3',
   },
   art: {
     hero: '/images/official/steam/library-hero.jpg',
