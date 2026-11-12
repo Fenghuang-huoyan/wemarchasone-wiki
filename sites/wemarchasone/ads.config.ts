@@ -1,8 +1,8 @@
 /**
  * Adsterra Native Banner slot after Quick Answer.
  *
- * Left empty on purpose. analytics.gaId in site.config.ts is an empty string.
- * Do not paste a measurement id, zone id, or script host from another site.
+ * Zone and script are this domain's own Get Code. Do not paste a key or host from another game.
+ * analytics.gaId in site.config.ts stays empty until a this-domain measurement id arrives.
  * Adult and sensitive categories stay off. The 404 page does not render a slot.
  */
 export type AdSlotConfig = {
@@ -16,18 +16,18 @@ export type AdSlotConfig = {
 
 const slots = {
   afterQuickAnswer: {
-    id: '',
+    id: '2ce34bb053b2611ca5a433bb647292e7',
     format: 'native-banner',
-    scriptSrc: '',
+    scriptSrc: 'https://bauval.org/21/2ce34bb053b2611ca5a433bb647292e7',
   },
 } as const satisfies Record<string, AdSlotConfig>;
 
 export const adsConfig = {
   network: 'adsterra' as const,
-  enabled: false,
+  enabled: true,
   invokeBase: '',
   /** Site-wide full script URL. A slot `scriptSrc` overrides this. */
-  scriptSrc: '',
+  scriptSrc: 'https://bauval.org/21/2ce34bb053b2611ca5a433bb647292e7',
   containerPrefix: 'container-',
   slots,
 };
