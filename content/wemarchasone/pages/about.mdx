@@ -1,0 +1,55 @@
+---
+title: "About the We March as One Guide — Unofficial Fan Site"
+description: "wemarchasone.wiki is an unofficial English fan guide for We March as One by dux. What the pages cover, how sources are dated, and where the legal notes live."
+h1: "About the We March as One guide"
+section: "About"
+order: 10
+verifiedAgainst: "Site policy for wemarchasone.wiki, plus the Steam store page and appdetails API checked 12 Nov 2026."
+quickAnswer:
+  - "We March as One Guide is a fan site at https://wemarchasone.wiki. It is not affiliated with dux, Valve, or Steam."
+  - "Pages are English on purpose. Steam lists English only. The name on the site is always the full title, We March as One."
+  - "Artwork is official Steam store art for AppID 5189160, with a credit file beside the images. The favicon is an original mark drawn for this site."
+  - "Google Analytics is not loaded. Advertisements are not loaded. There is no redeem-code page."
+sources:
+  - label: "Steam store — We March as One"
+    url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
+related:
+  - href: "/guide"
+    label: "Guide"
+  - href: "/disclaimer"
+    label: "Disclaimer"
+  - href: "/privacy"
+    label: "Privacy"
+  - href: "/"
+    label: "Home"
+banner: "/images/official/steam/header.jpg"
+bannerAlt: "Official Steam header for We March as One, the full title beside blue cubes meeting red cubes"
+---
+
+import Callout from '@framework/components/Callout.astro';
+
+This is a short English wiki for **We March as One**, Steam AppID **5189160**, built as a static site for **wemarchasone.wiki**.
+
+The pages that describe the game are the [guide](/guide), the [units](/units) note, the [progression](/progression) note, and the [tips](/tips) note. Each one quotes the Steam store page or the appdetails payload from 12 November 2026. A figure appears only when one of those sources printed it. Steam news for the app returned no posts that day, so no announcement is cited.
+
+## What “checked” means
+
+<Callout kind="note" title="A read date, not a playtest">
+“Checked 12 Nov 2026” means the Steam API and the English store page were read that day. It does not mean someone played the Nov 13, 2026 build. The full game was still marked coming soon. The free demo (app 5403150) was already listed as released on Oct 19, 2026, and this site has not played that either.
+</Callout>
+
+The support email on the Steam store page is playwemarchasone@gmail.com. The support URL field was empty, and the website field was null. That inbox belongs to dux, not to this wiki.
+
+Legal text lives on [Disclaimer](/disclaimer). Tracking lives on [Privacy](/privacy). The footer repeats both in short form.
+
+## Images
+
+Library hero, library capsule, hero capsule, the store header, the capsules, and the screenshots are official Steam store assets for AppID 5189160, downloaded from the Steam CDN and served from this site so pages do not hotlink Steam. Paths and source URLs are in [ATTRIBUTION.txt](/images/official/steam/ATTRIBUTION.txt). The favicon is an original arrangement of blue and red squares drawn for this site. It is not the Steam client icon and it is not a dux logo.
+
+## What is still unpublished
+
+- A numeric Steam price. `is_free` is false, `package_groups` was empty, and there was no `price_overview` on 12 November 2026.
+- A named unit roster, any skill-tree node, or any gold amount.
+- A redeem-code program.
+- A Mac or Linux build. Both platform flags were false.
+- Anything inside the demo or the Demo Gameplay Trailer that the written store text does not also say.

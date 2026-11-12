@@ -1,0 +1,54 @@
+---
+import { siteConfig } from '@site/site.config';
+import { adsConfig } from '@site/ads.config';
+
+const year = 2026;
+const gaOn = siteConfig.analytics.gaId.trim().length > 0;
+const adsOn = Object.values(adsConfig.slots).some((slot) => {
+  const id = slot.id.trim();
+  return adsConfig.enabled && id.length > 0 && !id.startsWith('ADSTERRA_');
+});
+---
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-grid">
+      <div>
+        <h2>Unofficial fan guide</h2>
+        <p class="fine" id="disclaimer">{siteConfig.disclaimer}</p>
+      </div>
+      <div>
+        <h2>On this site</h2>
+        <ul>
+          {siteConfig.footerNav.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Official</h2>
+        <ul>
+          <li><a href={siteConfig.steamUrl}>Steam store</a></li>
+          {siteConfig.social.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+          {siteConfig.supportEmail ? (
+            <li><a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a></li>
+          ) : null}
+        </ul>
+      </div>
+    </div>
+    <div id="privacy" class="fine">
+      <h2>Privacy</h2>
+      <p>
+        This is a static site. It has no accounts and does not ask for your {siteConfig.gameTitle} login.
+        {gaOn
+          ? 'Google Analytics is enabled with the measurement id in site config.'
+          : 'Google Analytics is not loaded, because analytics.gaId is empty.'}
+        {adsOn
+          ? ' A labeled Adsterra placement loads where a zone key is set.'
+          : ' Advertisements are not loaded, because the Adsterra Native Banner zone key is still empty.'}
+      </p>
+      <p>© {year} {siteConfig.domain}. {siteConfig.gameTitle} © {siteConfig.publisher}. Steam AppID {siteConfig.steamAppId}.</p>
+    </div>
+  </div>
+</footer>

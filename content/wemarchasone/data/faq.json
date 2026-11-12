@@ -1,0 +1,39 @@
+[
+  {
+    "q": "When does We March as One release?",
+    "a": "The Steam release_date field on 12 November 2026 is Nov 13, 2026, with coming_soon true. The English store page showed the same planned date and said the game is not yet available. This site does not describe the full game as already released.",
+    "featured": true
+  },
+  {
+    "q": "What kind of game is We March as One?",
+    "a": "Steam’s short description calls We March as One an incremental auto battler: start with a few shapes, build an army tens of thousands strong, paint troops onto the battlefield, and send them against enormous hordes, with every unit individually simulated. The longer text says incremental-style auto battler and a massive army of shapes. Genres on the store page are Indie, Simulation, and Strategy.",
+    "featured": true
+  },
+  {
+    "q": "Who develops and publishes We March as One?",
+    "a": "The Steam appdetails payload lists developer dux and publisher dux. The website field was null. The support URL was empty. The support email on the store page is playwemarchasone@gmail.com. This wiki is not affiliated with dux or Valve, and it does not read that mailbox.",
+    "featured": true
+  },
+  {
+    "q": "Are there We March as One codes?",
+    "a": "No redeem-code list was on the Steam store page or in the appdetails payload checked on 12 November 2026. Steam news for the app returned no posts. This site does not invent codes and does not have a codes page.",
+    "featured": true
+  },
+  {
+    "q": "Is a We March as One demo available?",
+    "a": "Yes. The full game’s demos array lists app 5403150, We March as One Demo. That app is free, type demo, Windows only, and its release_date is Oct 19, 2026 with coming_soon false. Its short description and about text were empty. This site has not played the demo.",
+    "featured": true
+  },
+  {
+    "q": "Does the store name the units or the skill-tree nodes?",
+    "a": "The published sentences say shapes, troops, new unit types from a branching skill tree, and soldiers and projectiles that are individually simulated. They do not name a roster, a node, a gold amount, or a tier. A recruit panel in the store screenshots labels rows Circle, Square, Hexagon, Triangle, Pentagon, Diamond, and Kite. This wiki records those labels as text in the images and does not copy the counts or treat them as a finished roster."
+  },
+  {
+    "q": "What PC do I need for We March as One?",
+    "a": "The only requirements block on 12 November 2026 is the Windows minimum: Windows 10 64-bit (21H1 or newer), a quad-core CPU (Intel Core i5-6400 or AMD Ryzen 3 1200), 8192 MB RAM, any DirectX 11 GPU with 1 GB VRAM (GeForce GTX 750, Radeon R7 260, or Intel UHD 630 are the examples), DirectX 11, and 2048 MB available space. There was no recommended block. Mac and Linux were false."
+  },
+  {
+    "q": "Is this site official?",
+    "a": "No. wemarchasone.wiki is a fan guide. It is not affiliated with dux, Valve, or Steam. Account help uses the email playwemarchasone@gmail.com printed on the Steam store page. That mailbox is not this wiki’s."
+  }
+]

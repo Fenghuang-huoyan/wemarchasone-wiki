@@ -1,0 +1,12 @@
+{
+  "release": "Nov 13, 2026",
+  "price": "Not listed",
+  "priceNote": "is_free is false. The 12 Nov 2026 appdetails payload had no price_overview and an empty package_groups list.",
+  "players": "Single-player",
+  "playersNote": "The only player-mode category on the full-game list. Family Sharing is also listed. No co-op category was present.",
+  "reviews": "Windows",
+  "reviewsNote": "Platforms on 12 Nov 2026: Windows only. Mac and Linux are false. The store page showed no user reviews. The full game was still coming soon.",
+  "modes": "Free demo",
+  "modesNote": "Demo AppID 5403150, release date Oct 19, 2026, is_free true. The full game is_free is false and was still coming soon.",
+  "platforms": "Windows"
+}

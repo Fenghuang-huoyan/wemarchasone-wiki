@@ -1,0 +1,68 @@
+---
+import { adsConfig, resolveAdPlacement } from '@site/ads.config';
+
+interface Props {
+  name: keyof typeof adsConfig.slots;
+  variant?: 'inline' | 'sidebar' | 'footer';
+}
+const { name, variant = 'inline' } = Astro.props;
+const placement = resolveAdPlacement(name);
+---
+{placement.active ? (
+  <aside class:list={['ad-slot', variant === 'sidebar' && 'ad-sidebar']} aria-label="Advertisement" data-slot={name}>
+    <p class="tiny">Advertisement</p>
+    <script is:inline async="async" data-cfasync="false" src={placement.scriptSrc}></script>
+    <div id={placement.containerId} class="ad-slot-frame"></div>
+  </aside>
+) : null}
+<style>
+  .ad-slot,
+  .ad-slot-frame {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-x: clip;
+    box-sizing: border-box;
+  }
+  .ad-slot { margin: 1rem 0 1.25rem; }
+  /* The network writes inline widths onto this node. !important keeps the box
+     inside the column when that width is a desktop row of tiles. */
+  .ad-slot-frame {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+    overflow-x: clip !important;
+  }
+  /* Creatives are injected after load, so :global reaches them. A native banner
+     defaults to four ~300px tiles; cap anything that can force that row wider
+     than the slot. */
+  .ad-slot :global(iframe),
+  .ad-slot :global(img),
+  .ad-slot :global(table),
+  .ad-slot :global(video),
+  .ad-slot :global(canvas),
+  .ad-slot :global(object),
+  .ad-slot :global(embed) {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .ad-slot :global(img) { height: auto; }
+  .ad-sidebar { display: none; }
+  @media (min-width: 1040px) {
+    .ad-sidebar { display: block; }
+  }
+  @media (max-width: 480px) {
+    .ad-slot-frame :global(*) {
+      box-sizing: border-box;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      flex-direction: column !important;
+      flex-wrap: wrap !important;
+      float: none !important;
+    }
+  }
+</style>
