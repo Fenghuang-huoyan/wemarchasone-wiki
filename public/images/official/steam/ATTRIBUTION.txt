@@ -1,0 +1,80 @@
+Official Steam store assets for We March as One (AppID 5189160).
+Self-hosted so the wiki does not hotlink the Steam CDN at page-view time.
+The bytes were downloaded from the Steam store CDN on 12 Nov 2026.
+Fan site: not affiliated with dux, Valve, or Steam.
+Store page: https://store.steampowered.com/app/5189160/We_March_as_One/
+Asset paths come from IStoreBrowseService GetItems and the appdetails API.
+Appdetails cache parameter: t=1792425821.
+Hashed filenames are what Steam returned. Unhashed library_hero.jpg, library_header.jpg, and capsule_616x353.jpg on the bare app path returned HTTP 404.
+GetItems did not list a separate library_header file. The store header below is the header asset.
+
+library-hero.jpg
+  Steam library hero, 1920x620
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/ea5963f5df8ce803c32d01696c1addc866223627/library_hero.jpg?t=1792425821
+
+library-hero-2x.jpg
+  Steam library hero, 3840x1240
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/ea5963f5df8ce803c32d01696c1addc866223627/library_hero_2x.jpg?t=1792425821
+
+library-capsule.jpg
+  Steam library capsule
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/a1956d4c664fc3c6e5ff33f5dbf13716431558a8/library_capsule.jpg?t=1792425821
+
+hero-capsule.jpg
+  Steam hero capsule
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/fb4393e14f85b0b870600416992c538e72f04778/hero_capsule.jpg?t=1792425821
+
+header.jpg
+  Store header from appdetails header_image, 460x215
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/52bc72368a29a1a13173db5ec3481a242422a6ca/header.jpg?t=1792425821
+
+capsule-616x353.jpg
+  Store capsule, 616x353
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/161535af9c6144986d7cac42e01d5fd31b6c153a/capsule_616x353.jpg?t=1792425821
+
+capsule-231x87.jpg
+  Small store capsule, 231x87, from appdetails capsule_image
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/8e04412b9aa23678b8c795c80cfb74291ee21401/capsule_231x87.jpg?t=1792425821
+
+Screenshots are the 600x338 store thumbnails from appdetails on 12 Nov 2026 (t=1792425821).
+Full-size 1920x1080 files exist at the same paths with .1920x1080.jpg. This site stores the thumbnails.
+
+ss-00.jpg
+  Top-down preparation field. Red blocks along the top, a blue formation below, brush and Fight controls. The frame is marked Level 3.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/718d09d2e69cae7b79b929d914eebb92fe7caf80/ss_718d09d2e69cae7b79b929d914eebb92fe7caf80.600x338.jpg?t=1792425821
+
+ss-01.jpg
+  Dense red formation meeting a dense blue formation, with a game-speed control.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/8b779ce4d8be893d9a2106179fa2b38b684c8b07/ss_8b779ce4d8be893d9a2106179fa2b38b684c8b07.600x338.jpg?t=1792425821
+
+ss-02.jpg
+  Battlefield with a river, trees, and blocky buildings. Blue group at the left, red group at the right.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/b05f2b28650d621303ffa6a8ba2ef4f114ffe9f7/ss_b05f2b28650d621303ffa6a8ba2ef4f114ffe9f7.600x338.jpg?t=1792425821
+
+ss-03.jpg
+  Branching node graph beside a recruit panel, light background.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/2dfaf200f5d80dbb07e4721d154eadf3ebd3ecaf/ss_2dfaf200f5d80dbb07e4721d154eadf3ebd3ecaf.600x338.jpg?t=1792425821
+
+ss-04.jpg
+  Top-down preparation screen with an Upgrades button beside Undo, Clear, Levels, and Fight.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/16adfc3faecacb0badd266680bc3ccc9dda40089/ss_16adfc3faecacb0badd266680bc3ccc9dda40089.600x338.jpg?t=1792425821
+
+ss-05.jpg
+  Wide contact between a pale red field and a blue field, with a game-speed control.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/1f0f3157b9bda1ec2386953048f90f57496feb05/ss_1f0f3157b9bda1ec2386953048f90f57496feb05.600x338.jpg?t=1792425821
+
+ss-06.jpg
+  Close view of packed red shapes meeting packed blue shapes.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/1698f8594213c8a5befacda2319377870d6ffa02/ss_1698f8594213c8a5befacda2319377870d6ffa02.600x338.jpg?t=1792425821
+
+ss-07.jpg
+  Top-down street of grey blocks with mixed shape sizes along a front.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/f85e9f9f5a262d390339df6b9e75b06893a1cd2f/ss_f85e9f9f5a262d390339df6b9e75b06893a1cd2f.600x338.jpg?t=1792425821
+
+ss-08.jpg
+  Dark branching node graph beside a recruit panel, with a Back to Levels button.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/3a79aa018ce94bbb3fd2c5c5a16f0340ae809d9d/ss_3a79aa018ce94bbb3fd2c5c5a16f0340ae809d9d.600x338.jpg?t=1792425821
+
+ss-09.jpg
+  Angled view of large red and blue formations meeting along a front.
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5189160/b60ce861065f4d90cc0bbc81344586dcb29cf072/ss_b60ce861065f4d90cc0bbc81344586dcb29cf072.600x338.jpg?t=1792425821

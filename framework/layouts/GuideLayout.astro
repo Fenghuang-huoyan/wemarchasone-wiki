@@ -1,0 +1,116 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import Toc from '../components/Toc.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { articleJsonLd } from '../lib/seo';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  section: string;
+  verifiedAgainst: string;
+  quickAnswer: string[];
+  sources: { label: string; url: string }[];
+  related: { href: string; label: string }[];
+  headings: Heading[];
+  banner: string;
+  bannerAlt: string;
+  extraJsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+const props = Astro.props;
+const article = articleJsonLd({
+  title: props.title,
+  description: props.description,
+  pathname: Astro.url.pathname,
+});
+const extra = props.extraJsonLd
+  ? Array.isArray(props.extraJsonLd)
+    ? props.extraJsonLd
+    : [props.extraJsonLd]
+  : [];
+---
+<BaseLayout title={props.title} description={props.description} jsonLd={[article, ...extra]}>
+  <main id="content" class="shell layout">
+    <article class="guide">
+      <img
+        class="page-banner"
+        src={props.banner}
+        alt={props.bannerAlt}
+        width="600"
+        height="338"
+        decoding="async"
+      />
+      <header class="page-head">
+        <p class="crumbs"><a href="/">Home</a> / {props.section}</p>
+        <p class="kicker">{props.section}</p>
+        <h1>{props.h1}</h1>
+        <p class="checked"><b>Sources checked</b> <span>{props.verifiedAgainst}</span></p>
+      </header>
+      <QuickAnswer sentences={props.quickAnswer} />
+      <AdSlot name="afterQuickAnswer" />
+      <div class="toc-mobile">
+        <Toc headings={props.headings} />
+      </div>
+      <div class="prose">
+        <slot />
+      </div>
+      <section class="sources">
+        <h2>Sources and last check</h2>
+        <p>
+          {props.verifiedAgainst} Where a number comes from a patch post and this site has not confirmed it in a current client, the page says so.
+        </p>
+        <ul>
+          {props.sources.map((source) => (
+            <li><a href={source.url}>{source.label}</a></li>
+          ))}
+        </ul>
+        {props.related.length > 0 && (
+          <>
+            <h2>Related</h2>
+            <ul class="related">
+              {props.related.map((link) => (
+                <li><a href={link.href}>{link.label}</a></li>
+              ))}
+            </ul>
+          </>
+        )}
+      </section>
+    </article>
+    <aside class="side">
+      <Toc headings={props.headings} />
+    </aside>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-banner {
+    width: calc(100% + 2.3rem);
+    max-width: none;
+    height: 9.5rem;
+    margin: -1.25rem -1.15rem 1rem;
+    object-fit: cover;
+    object-position: center 42%;
+    border-bottom: 3px solid #3a465c;
+  }
+  @media (min-width: 720px) {
+    .page-banner {
+      width: calc(100% + 3.4rem);
+      height: 11.5rem;
+      margin: -1.6rem -1.7rem 1.1rem;
+    }
+  }
+  .toc-mobile { margin: 0 0 1rem; }
+  @media (max-width: 1039px) {
+    .side { display: none; }
+  }
+  @media (min-width: 1040px) {
+    .toc-mobile { display: none; }
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+title: "Privacy — We March as One Guide"
+description: "Privacy for wemarchasone.wiki, the unofficial We March as One fan guide. Static pages, no accounts, no Google Analytics, and no advertising script."
+h1: "Privacy for the We March as One guide"
+section: "Privacy"
+order: 11
+verifiedAgainst: "Site policy for wemarchasone.wiki as published in this repository. Analytics and ad config are empty in this build."
+quickAnswer:
+  - "wemarchasone.wiki is a static fan guide for We March as One. It has no accounts and does not ask for a Steam login."
+  - "analytics.gaId is an empty string, so Google Analytics is not loaded."
+  - "The Adsterra slot is disabled and its id and script URL are empty. No advertising script from another game is included."
+  - "The same note is in the footer of every page. The legal disclaimer is a separate page."
+sources:
+  - label: "Steam store — We March as One"
+    url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
+related:
+  - href: "/disclaimer"
+    label: "Disclaimer"
+  - href: "/about"
+    label: "About"
+  - href: "/"
+    label: "Home"
+banner: "/images/official/steam/header.jpg"
+bannerAlt: "Official Steam header for We March as One, the full title beside blue cubes meeting red cubes"
+---
+
+import Callout from '@framework/components/Callout.astro';
+
+This page describes **wemarchasone.wiki** only. It is not dux’s privacy policy, and it is not Steam’s.
+
+## What the site stores
+
+The site is a set of static files. It does not create an account, does not take a password, and does not ask for your We March as One or Steam login. There is no comment box and no newsletter form in this version.
+
+Pages you request are served as ordinary documents. This repository does not add a first-party cookie for tracking.
+
+## Analytics
+
+`analytics.gaId` is an empty string. The base layout loads a Google tag only when that string is non-empty, so this build does not load Google Analytics.
+
+## Advertising
+
+The Native Banner slot after the quick answer is off. `enabled` is false. The zone id is empty. The script URL is empty. Nothing is requested from an ad host. The 404 page does not render a slot.
+
+<Callout kind="note" title="This domain only">
+When a measurement id or a zone is added later, it has to be created for wemarchasone.wiki. This repository does not carry a measurement id or an ad zone from any other game site.
+</Callout>
+
+Steam links in the footer are ordinary outbound links. Steam’s own site sets its own cookies once you leave this one. The support address playwemarchasone@gmail.com is the address printed on the Steam page. Mail there is not received by this wiki.
+
+The short version of this note is in the footer under Privacy. Affiliation and trademarks are on the [disclaimer](/disclaimer).

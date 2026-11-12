@@ -1,0 +1,108 @@
+---
+title: "We March as One Guide — How the Incremental Auto Battler Works"
+description: "We March as One guide: the incremental auto battler from dux, still coming soon for Nov 13, 2026. What Steam says you paint, earn, and simulate."
+h1: "We March as One, in the store’s words"
+section: "Guide"
+order: 1
+verifiedAgainst: "Steam appdetails and the English store page for AppID 5189160, plus the demo app 5403150, checked 12 Nov 2026. Steam news returned no posts."
+quickAnswer:
+  - "We March as One is dux’s single-player incremental auto battler on Steam (AppID 5189160). The store date is Nov 13, 2026. On 12 Nov 2026 the appdetails payload still marked the full game coming soon, Windows only, and not free."
+  - "The short description is the pitch: start with a few shapes, build an army tens of thousands strong, paint troops onto the battlefield, and fight enormous hordes, with every unit individually simulated."
+  - "The longer text splits that into painting an army, gold from defeated enemies whether you win or lose, a branching skill tree, fallen troops that return, three camera modes, and a sandbox mode with a level editor."
+  - "There is a free demo, AppID 5403150, dated Oct 19, 2026. There is no public price and no redeem-code list in the sources checked."
+sources:
+  - label: "Steam store — We March as One"
+    url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
+  - label: "Steam demo — We March as One Demo, app 5403150"
+    url: "https://store.steampowered.com/app/5403150/We_March_as_One_Demo/"
+related:
+  - href: "/units"
+    label: "Units"
+  - href: "/progression"
+    label: "Progression"
+  - href: "/tips"
+    label: "Tips"
+  - href: "/"
+    label: "Home"
+banner: "/images/official/steam/ss-01.jpg"
+bannerAlt: "Official Steam screenshot from We March as One: a dense red formation meeting a dense blue formation, with a game-speed control underneath"
+---
+
+import Callout from '@framework/components/Callout.astro';
+
+This is the overview for **We March as One** before the Nov 13, 2026 unlock. It stays with the sentences Steam has already printed. It does not invent a unit roster, skill-tree nodes, gold amounts, or a tier list. What the store does and does not say about troops is on [Units](/units). How gold, recruiting, and the army you keep are described is on [Progression](/progression). Readings of those sentences, marked as unread in a client, are on [Tips](/tips).
+
+## What We March as One is
+
+The store short description is one sentence:
+
+> Start with a few shapes and build an army tens of thousands strong. Paint your troops onto the battlefield and send them to war against enormous hordes in this incremental auto battler where every unit is individually simulated.
+
+The longer text opens with the same idea in fewer words: We March as One is an incremental-style auto battler about building a massive army of shapes.
+
+Steam’s genre field is Indie, Simulation, and Strategy. The player category is Single-player. Family Sharing is also listed. There is no co-op or multiplayer category in the 12 Nov 2026 payload. The store page showed no user reviews, and the release block said the game is not yet available.
+
+User tags returned by the store browse API that day, in weight order, were Incremental, Simulation, Strategy, Auto Battler, War, Tower Defense, Economy, Sandbox, Wargame, Tactical RPG, Tactical, RTS, Turn-Based Tactics, RPG, Minimalist, Physics, Abstract, Strategy RPG, Singleplayer, and Roguelike. Those tags are not the genre field. They can change, and a tag is not a system the about text described. The about text’s own phrase is incremental auto battler. It does not say the battles are turn-based.
+
+## The loop the store describes
+
+Nothing in the sources checked is a build order. The safe sequence is the one the store headings repeat.
+
+**Paint your army.** You paint troops directly onto the battlefield however you like, and you position them to counter the enemy force. That is the whole of the published placement rule. See [Units](/units).
+
+**Upgrade your units.** You earn gold from defeated enemies, whether you win or lose the battle. You recruit more troops, unlock new unit types from a branching skill tree, and return with a stronger army. Fallen troops return for the next battle, so you keep the army you have built. See [Progression](/progression).
+
+**Massive battles.** Every soldier and projectile is individually simulated. Isometric, top-down, or fly-through modes are the three ways the store says you can view the action.
+
+**Sandbox mode.** The store lists a level editor, and it says you can experiment with unusual army compositions across different battlefield layouts.
+
+<Callout kind="note" title="A store page, not a played client">
+“Checked 12 Nov 2026” means the Steam API and the English store page were read that day. It does not mean someone played the Nov 13 build. The free demo was already listed, and this site has not played that either. If the client and a sentence here disagree, trust the client.
+</Callout>
+
+Store screenshots match that setting in pictures, not in a manual. They show blue and red fields of small shapes, preparation screens with a brush and a Fight button, a landscape with a river and trees, and a node graph beside a recruit panel. [Units](/units) notes the row labels visible on that panel and explains why the counts are not copied. A pre-release screenshot is not a balance sheet, and the two recruit frames do not show the same counts.
+
+The appdetails movie list names one trailer, **Demo Gameplay Trailer**. This page does not describe the video.
+
+## Release, price, and the demo
+
+| Fact | Source on 12 Nov 2026 |
+| --- | --- |
+| Release | Nov 13, 2026. `coming_soon: true`. The store page said the game is not yet available. |
+| Clock time | The store prints the date, not a time. The browse API `steam_release_date` was 1794590940, which is 13 November 2026, 17:29 UTC. |
+| Developer / publisher | dux / dux. The website field was null. |
+| Price | `is_free: false`. No `price_overview`. `package_groups` was empty, so no number was in that payload. |
+| Platforms | Windows only. Mac and Linux are false. |
+| Players | Single-player, plus the Family Sharing feature category. |
+| Demo | App 5403150, type demo, free, release date Oct 19, 2026, `coming_soon: false`. Its platforms field is Windows only. Its short description was empty. |
+| Account | Support URL empty. Support email playwemarchasone@gmail.com. This wiki does not read that mailbox. |
+| Reviews | No user-review block. The full game was not out yet. |
+| News | The Steam news endpoint for app 5189160 returned no posts. |
+
+The full game’s `demos` array is app **5403150**, named We March as One Demo, and the browse API marks that demo to show above the purchase option. Its own about text and PC requirements were empty, so this wiki does not invent a demo feature list beyond the categories on that app: Single-player, Game demo, Camera Comfort, Custom Volume Controls, Keyboard Only Option, and Playable without Timed Input. Category id 80 came back as the token `#category_playable_at_your_own_pace` rather than a sentence. Those lines are on the demo app. The full game’s category list that day was only Single-player and Family Sharing.
+
+Age-rating blocks in the full-game payload use generated codes: DEJUS `l`, Steam Germany `0`, and IGRS `3`, each with `required_age` 0 and empty descriptors. The top-level `required_age` is 0. Content-descriptor ids were empty. This page does not translate those codes into a content warning the payload did not write.
+
+## Platforms, language, and requirements
+
+`supported_languages` is the string English. The store language table shows an interface check for English and leaves full audio and subtitles unchecked. The browse API agrees: English is supported, `full_audio` false, `subtitles` false. This wiki is English only, which matches the only language on the store page.
+
+Windows minimum, and the only requirements block printed:
+
+- OS: Windows 10 64-bit (21H1 or newer)
+- Processor: Quad-core CPU — Intel Core i5-6400 / AMD Ryzen 3 1200
+- Memory: 8192 MB RAM
+- Graphics: Any DirectX 11 capable GPU with 1 GB VRAM (GeForce GTX 750 / Radeon R7 260 / Intel UHD 630)
+- DirectX: Version 11
+- Storage: 2048 MB available space
+
+There was no recommended block. Mac requirements and Linux requirements were empty, and both platform flags were false.
+
+The store page’s controller block that day listed full and partial Xbox support, PlayStation 4 and 5 support, and Steam Input as false, with the controller-support wizard marked complete. `bNoKeyboardSupport` was false, so the page did not flag the keyboard as unsupported. This site has not tested a pad or a keyboard.
+
+## What these pages will not invent
+
+- A unit roster, a stat line, or a tier list. The store says shapes and new unit types. It does not name them in the about text. See [Units](/units).
+- Skill-tree nodes, gold amounts, or upgrade costs. See [Progression](/progression).
+- A redeem-code page. No code program was in the sources checked.
+- A claim that the full game is already out. On 12 Nov 2026 it was still coming soon for Nov 13, 2026.

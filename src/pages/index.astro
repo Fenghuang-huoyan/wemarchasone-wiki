@@ -1,0 +1,276 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@framework/layouts/BaseLayout.astro';
+import QuickAnswer from '@framework/components/QuickAnswer.astro';
+import AdSlot from '@framework/components/AdSlot.astro';
+import FaqList from '@framework/components/FaqList.astro';
+import { loadData } from '@framework/lib/content';
+import { siteConfig } from '@site/site.config';
+import { faqJsonLd, websiteJsonLd } from '@framework/lib/seo';
+
+const meta = loadData<{
+  release: string;
+  price: string;
+  priceNote: string;
+  players: string;
+  playersNote: string;
+  reviews: string;
+  reviewsNote: string;
+  modes: string;
+  modesNote: string;
+  platforms: string;
+}>('meta');
+
+const faq = loadData<{ q: string; a: string; featured?: boolean }[]>('faq');
+const pages = (await getCollection('pages'))
+  .filter((page) => page.data.order < 10)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const art = {
+  header: '/images/official/steam/header.jpg',
+  hero: '/images/official/steam/library-hero.jpg',
+  hero2x: '/images/official/steam/library-hero-2x.jpg',
+  capsule: '/images/official/steam/capsule-616x353.jpg',
+  contact: '/images/official/steam/ss-01.jpg',
+  field: '/images/official/steam/ss-00.jpg',
+  river: '/images/official/steam/ss-02.jpg',
+  close: '/images/official/steam/ss-06.jpg',
+  tree: '/images/official/steam/ss-08.jpg',
+};
+
+const guideArt: Record<string, { src: string; alt: string }> = {
+  guide: {
+    src: art.contact,
+    alt: 'Dense red and blue formations meeting in a We March as One store screenshot',
+  },
+  units: {
+    src: art.close,
+    alt: 'Close view of red and blue shapes in contact in a We March as One store screenshot',
+  },
+  progression: {
+    src: art.tree,
+    alt: 'Branching node graph and recruit panel in a We March as One store screenshot',
+  },
+  tips: {
+    src: art.field,
+    alt: 'Top-down preparation field with a blue formation and a Fight button in We March as One',
+  },
+};
+
+const doors = [
+  {
+    href: '/guide',
+    num: '01',
+    title: 'Guide',
+    text: 'What We March as One is, the Nov 13, 2026 date, the free demo, and the fact table from Steam.',
+    image: art.capsule,
+    alt: 'Official Steam capsule for We March as One, blue cubes facing red cubes under the full title',
+  },
+  {
+    href: '/units',
+    num: '02',
+    title: 'Units',
+    text: 'Shapes you paint onto the field. No roster and no tier list, because Steam did not print one.',
+    image: art.close,
+    alt: 'Close Steam screenshot of a red mass of shapes meeting a blue mass in We March as One',
+  },
+  {
+    href: '/progression',
+    num: '03',
+    title: 'Progression',
+    text: 'Gold whether you win or lose, the branching skill tree, and fallen troops that return.',
+    image: art.tree,
+    alt: 'Steam screenshot of a skill-tree graph and a recruit panel in We March as One',
+  },
+  {
+    href: '/tips',
+    num: '04',
+    title: 'Tips',
+    text: 'Readings of the store text only. Placement, a loss that still pays, and the three camera modes.',
+    image: art.field,
+    alt: 'Steam screenshot of a top-down We March as One field before the fight, with Undo, Clear, and Fight',
+  },
+];
+
+const stills = [
+  {
+    src: art.field,
+    caption: 'Preparation field',
+    alt: 'Top-down We March as One screenshot: red blocks along the top of a beige field and a blue formation below, with Undo, Clear, Levels, and Fight',
+  },
+  {
+    src: art.river,
+    caption: 'A laid-out battlefield',
+    alt: 'We March as One screenshot of a river, trees, and blocky buildings between a blue group and a red group',
+  },
+  {
+    src: art.close,
+    caption: 'Contact',
+    alt: 'Close We March as One screenshot of packed red shapes meeting packed blue shapes, with a game-speed control',
+  },
+  {
+    src: art.tree,
+    caption: 'Skill-tree screen',
+    alt: 'We March as One screenshot of a branching node graph beside a recruit panel and a Back to Levels button',
+  },
+];
+---
+<BaseLayout
+  title={siteConfig.homeTitle}
+  description={siteConfig.homeDescription}
+  jsonLd={[
+    websiteJsonLd(),
+    faqJsonLd(faq.filter((item) => item.featured).map((item) => ({ q: item.q, a: item.a }))),
+  ]}
+>
+  <main id="content">
+    <div class="shell">
+      <p class="tape">
+        <span>Fan guide · not affiliated with dux or Valve</span>
+        <span>Steam App {siteConfig.steamAppId}</span>
+        <span>{siteConfig.version.label}</span>
+      </p>
+
+      <section class="town-hero">
+        <img
+          class="hero-art"
+          src={siteConfig.art.hero}
+          srcset={`${art.hero} 1920w, ${art.hero2x} 3840w`}
+          sizes="(min-width: 1536px) 1536px, 100vw"
+          alt={siteConfig.art.heroAlt}
+          width="1920"
+          height="620"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <div class="hero-panel">
+          <p class="kicker">{siteConfig.developer} · planned release {meta.release}</p>
+          <h1>We March as One is still coming soon.</h1>
+          <p class="lede">
+            English pages for the incremental auto battler: paint troops onto the battlefield, earn gold whether you win or lose, and keep the army when fallen troops return.
+            On 12 Nov 2026 the full game was still marked coming soon for Nov 13, 2026. Where a number was never printed, the page says so.
+          </p>
+          <div class="cta-row">
+            <a class="btn" href="/guide">Guide</a>
+            <a class="btn ghost" href="/units">Units</a>
+            <a class="btn ghost" href="/progression">Progression</a>
+            <a class="btn ghost" href={siteConfig.steamUrl}>View on Steam</a>
+          </div>
+          <p class="version-note">{siteConfig.version.detail}</p>
+        </div>
+      </section>
+      <p class="art-credit">
+        Library hero, capsules, header, and screenshots are official Steam store assets for App {siteConfig.steamAppId}, saved from the store CDN.
+        Credits and source URLs: <a href="/images/official/steam/ATTRIBUTION.txt">ATTRIBUTION.txt</a>.
+      </p>
+
+      <section class="section">
+        <h2>Four pages</h2>
+        <p class="section-intro">
+          Open the guide, the units note, progression, or the tips. There is no codes page. The sources checked do not list a redeem program.
+        </p>
+        <div class="door-grid">
+          {doors.map((door) => (
+            <a class="door" href={door.href}>
+              <span class="card-art">
+                <img src={door.image} alt={door.alt} width="600" height="338" decoding="async" />
+                <span class="num">{door.num}</span>
+              </span>
+              <span class="card-copy">
+                <h3>{door.title}</h3>
+                <p>{door.text}</p>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="section" aria-label="Official Steam screenshots">
+        <h2>The store’s own frames</h2>
+        <p class="section-intro">
+          Four screenshots from the Steam page: a preparation field, a battlefield with a river, a close contact, and a skill-tree screen. They are not a unit manual.
+        </p>
+        <div class="still-row">
+          {stills.map((still) => (
+            <figure>
+              <img src={still.src} alt={still.alt} width="600" height="338" loading="lazy" decoding="async" />
+              <figcaption>{still.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section class="stat-row" aria-label="Steam figures">
+        <div class="stat"><strong>{meta.price}</strong><span>{meta.priceNote}</span></div>
+        <div class="stat"><strong>{meta.reviews}</strong><span>{meta.reviewsNote}</span></div>
+        <div class="stat"><strong>{meta.players}</strong><span>{meta.playersNote}</span></div>
+        <div class="stat"><strong>{meta.modes}</strong><span>{meta.modesNote}</span></div>
+      </section>
+
+      <section class="section home-quick">
+        <QuickAnswer
+          sentences={[
+            'We March as One is an incremental auto battler from dux, who also publish it, on Steam (AppID 5189160). The store date is Nov 13, 2026. On 12 Nov 2026 the appdetails payload still marked the full game coming soon, Windows only, and not free.',
+            'The short description says you start with a few shapes, build an army tens of thousands strong, paint troops onto the battlefield, and send them against enormous hordes, with every unit individually simulated.',
+            'The longer text adds gold from defeated enemies whether you win or lose, new unit types from a branching skill tree, fallen troops that return, isometric, top-down, or fly-through cameras, and a sandbox mode with a level editor.',
+            'A free demo, AppID 5403150, is dated Oct 19, 2026. There is no redeem-code list and no public price in the payload checked that day. This site does not invent a roster or a gold amount.',
+          ]}
+        />
+        <AdSlot name="afterQuickAnswer" />
+      </section>
+
+      <section class="section">
+        <h2>The pages</h2>
+        <p class="section-intro">
+          English only. A line from the Steam page is labeled with the day it was read. A missing stat stays missing.
+        </p>
+        <div class="card-grid">
+          {pages.map((page) => (
+            <a class="guide-card" href={`/${page.id}`}>
+              <span class="card-art">
+                <img
+                  src={guideArt[page.id]?.src ?? art.header}
+                  alt={guideArt[page.id]?.alt ?? siteConfig.art.headerAlt}
+                  width="600"
+                  height="338"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <span class="card-copy">
+                <span class="section-tag">{page.data.section}</span>
+                <h3>{page.data.h1}</h3>
+                <p>{page.data.description}</p>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="scope">
+          <div>
+            <h2>What this wiki is for</h2>
+            <p>
+              The store page and the demo page live at {siteConfig.databases.map((db, i) => (<><a href={db.href}>{db.label}</a>{i < siteConfig.databases.length - 1 ? ', ' : ''}</>))}. This site is the skim: the incremental auto battler loop, what is and is not known about units, and the progression sentences Steam actually wrote.
+            </p>
+            <p>
+              The full game is scheduled to unlock on {meta.release}. It was still coming soon when these pages were written. If the client and this page disagree, trust the client.
+            </p>
+          </div>
+          <div>
+            <h2>In Steam’s words</h2>
+            <p>
+              {siteConfig.developer} is both the developer and the publisher. Platforms on the API: {meta.platforms}. Genres: Indie, Simulation, and Strategy. The support URL was empty. The support email on the store page is playwemarchasone@gmail.com. This wiki does not read that mailbox.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section home-faq">
+        <h2>Short answers</h2>
+        <FaqList featuredOnly />
+      </section>
+    </div>
+  </main>
+</BaseLayout>

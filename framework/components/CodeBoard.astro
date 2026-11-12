@@ -1,0 +1,89 @@
+---
+import { loadData } from '../lib/content';
+
+interface CodeRow {
+  code: string;
+  reward: string;
+  status: 'newest' | 'conflict' | 'stale' | 'expired' | 'placeholder';
+  statusLabel: string;
+  note: string;
+}
+interface CodeFile {
+  checked: string;
+  groups: { id: string; title: string; intro: string; rows: CodeRow[] }[];
+}
+const data = loadData<CodeFile>('codes');
+---
+<div class="code-board">
+  <p class="checked"><b>Code check</b> <span>{data.checked}. A row is only as good as its note. This site did not redeem a code.</span></p>
+  {data.groups.map((group) => (
+    <section>
+      <h2>{group.title}</h2>
+      <p>{group.intro}</p>
+      <div style="overflow-x:auto">
+        <table class="code-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Reported reward</th>
+              <th>Status</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            {group.rows.map((row) => (
+              <tr>
+                <td>
+                  <span class="code-cell">
+                    <code>{row.code}</code>
+                    {row.status !== 'placeholder' && (
+                      <button class="copy" type="button" data-code={row.code}>Copy</button>
+                    )}
+                  </span>
+                </td>
+                <td>{row.reward}</td>
+                <td><span class:list={['badge', row.status]}>{row.statusLabel}</span></td>
+                <td>{row.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  ))}
+</div>
+<script is:inline>
+  function bindCopyButtons() {
+  document.querySelectorAll('.copy').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const code = button.dataset.code || '';
+      const previous = button.textContent;
+      button.textContent = 'Copied';
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(code);
+        ok = true;
+      } catch {
+        const area = document.createElement('textarea');
+        area.value = code;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.left = '-9999px';
+        document.body.appendChild(area);
+        area.select();
+        try { ok = document.execCommand('copy'); } catch { ok = false; }
+        area.remove();
+      }
+      button.textContent = ok ? 'Copied' : 'Select the code';
+      window.setTimeout(() => {
+        button.textContent = previous;
+      }, 2500);
+    });
+  });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindCopyButtons);
+  } else {
+    bindCopyButtons();
+  }
+</script>
