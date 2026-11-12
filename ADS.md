@@ -1,9 +1,9 @@
 # Ads — wemarchasone.wiki
 
-The Native Banner slot after Quick Answer is wired and **turned off**.
+The Native Banner slot after Quick Answer is wired and **turned on** for this domain only.
 
-`sites/wemarchasone/ads.config.ts` sets `enabled` to false. `afterQuickAnswer.id` is empty. `afterQuickAnswer.scriptSrc` is empty. `scriptSrc` on the config is empty. `invokeBase` stays empty. No zone from another game is stored here.
+`sites/wemarchasone/ads.config.ts` sets `enabled` to true. `afterQuickAnswer.id` is `2ce34bb053b2611ca5a433bb647292e7`. `afterQuickAnswer.scriptSrc` and the site-wide `scriptSrc` are `https://bauval.org/21/2ce34bb053b2611ca5a433bb647292e7`. The container id is `container-2ce34bb053b2611ca5a433bb647292e7`. No key from another game is stored here.
 
-`analytics.gaId` in `sites/wemarchasone/site.config.ts` is an empty string. The base layout does not load a Google tag.
+`analytics.gaId` in `sites/wemarchasone/site.config.ts` is still an empty string. The base layout does not load GA4 until a measurement id is added.
 
 Adult and sensitive categories stay off. The 404 page does not render a slot.
