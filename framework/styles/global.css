@@ -480,6 +480,41 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: 0.01em
   font-size: 0.95rem;
   margin: 0.8rem 0 1rem;
 }
+/* Scroll the table, not the page. .guide keeps overflow:hidden for the banner. */
+.table-scroll {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0.8rem 0 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-color: var(--accent-hover) transparent;
+}
+.prose .table-scroll table {
+  width: 100%;
+  margin: 0;
+  table-layout: fixed;
+}
+.prose .table-scroll th:first-child,
+.prose .table-scroll td:first-child {
+  width: 5.75rem;
+}
+.prose .table-scroll th,
+.prose .table-scroll td {
+  overflow-wrap: break-word;
+}
+.table-scroll::-webkit-scrollbar {
+  height: 0.5rem;
+}
+.table-scroll::-webkit-scrollbar-thumb {
+  background: var(--olive-2);
+  border-radius: 999px;
+}
+.table-scroll:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+}
 .prose th, .prose td {
   text-align: left;
   vertical-align: top;
@@ -500,6 +535,9 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: 0.01em
   padding: 0.05rem 0.3rem;
   border-radius: 6px;
   border: 1px solid var(--line);
+}
+@media (max-width: 370px) {
+  .prose code { overflow-wrap: break-word; }
 }
 .callout {
   border-radius: 16px;
