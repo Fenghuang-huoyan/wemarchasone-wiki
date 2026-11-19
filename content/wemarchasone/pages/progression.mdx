@@ -4,15 +4,17 @@ description: "We March as One progression guide: 50-level campaign milestones, g
 h1: "We March as One Progression & Skill Tree Guide"
 section: "Progression"
 order: 3
-verifiedAgainst: "Steam store release client (released 13 Nov 2026) and official Steam achievements, checked 19 Nov 2026."
+verifiedAgainst: "Steam store page (AppID 5189160) and official Steam achievements list, checked 19 Nov 2026."
 quickAnswer:
   - "Progression is built on a persistent loop: gold is earned from defeated enemies whether you win or lose each battle, and fallen troops return for subsequent encounters."
-  - "The main campaign spans 50 levels, featuring major City fortress battles at levels 10, 20, 30, 40, and 50. Performance is rated with DECISIVE and HEROIC badges."
-  - "Gold is spent on a permanent branching skill tree that unlocks new unit shapes, scales total army capacity up to tens of thousands, and enhances specific unit types (including The King crown branch for Circles)."
-  - "Campaign upgrades are permanent with no respec option. In Sandbox mode, troops and upgrades are unlocked by encountering them across Campaign, Tactics, Command, and Muster modes."
+  - "The main campaign spans 50 levels, featuring City levels at levels 10, 20, 30, 40, and 50 as confirmed by the Sacked achievement. Performance ratings include DECISIVE and HEROIC badges."
+  - "Gold is spent on a branching skill tree that unlocks new unit types and upgrades army capacity, as confirmed by Steam achievements (Fresh Recruits, Full Muster, Every Last Leaf)."
+  - "Specific node paths, permanent respec locks, and Sandbox unlock conditions reflect in-game client systems and remain unverified on official public store pages."
 sources:
   - label: "Steam store — We March as One"
     url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
+  - label: "Steam Community — We March as One Achievements"
+    url: "https://steamcommunity.com/stats/5189160/achievements/"
 related:
   - href: "/guide"
     label: "Guide"
@@ -28,17 +30,17 @@ bannerAlt: "Official Steam screenshot from We March as One: a dark branching nod
 
 import Callout from '@framework/components/Callout.astro';
 
-Progression in **We March as One** ties battle outcomes directly to army growth. Following the November 13, 2026 Steam release, the progression mechanics are verified: players push through a 50-level campaign, reinvest gold into a branching node graph, and expand recruitment capacity toward tens of thousands of individually simulated shapes.
+Progression in **We March as One** ties battle outcomes directly to army growth. The core loop is verified by official Steam store text and Steam achievements: players push through a 50-level campaign (*We March as One* achievement), earn gold on win or loss (*Lessons Learned*), reinvest into a branching skill tree (*Every Last Leaf*), and expand army capacity (*Full Muster*).
 
 For individual troop shapes and placement rules, see [Units](/units). For overall game systems, see the [guide](/guide).
 
 ## The Core Loop: Gold, Army Persistence, and Defeat
 
-The campaign economy is defined by three persistent rules:
+The campaign economy is defined by persistent progression rules:
 
-1. **Gold on Win or Lose**: Defeated enemy shapes yield gold regardless of battle outcome. Even a lost battle contributes economic resources toward the next upgrade. The achievement **Lessons Learned** ("Lose a battle") acknowledges defeat as a natural progression step.
-2. **Persistent Army Size**: Fallen friendly troops return for the next battle. Losses are not permanent wipes; your army size accumulates as you recruit more shapes.
-3. **No Respecs**: Node purchases on the campaign skill tree are permanent. Strategy comes from prioritizing capacity versus specialized branch upgrades.
+1. **Gold on Win or Lose**: Defeated enemy shapes yield gold regardless of battle outcome. The store page states you earn gold whether you win or lose, and the achievement **Lessons Learned** ("Lose a battle") acknowledges defeat as part of normal progression.
+2. **Persistent Army Size**: Fallen friendly troops return for the next battle. As described on Steam: *"Fallen troops return for the next battle, so you keep the army you have built."*
+3. **No Respecs (Unverified / ❓)**: In-game client purchases on the campaign skill tree are permanent without an in-game respec button; this restriction is not published in store documentation.
 
 <Callout kind="note" title="A Loss is Still Economic Progress">
 Because gold is credited from enemies defeated during the engagement, repeated attempts against difficult hordes steadily accumulate gold to purchase army capacity or new troop types.
@@ -46,17 +48,17 @@ Because gold is credited from enemies defeated during the engagement, repeated a
 
 ## The Branching Skill Tree Architecture
 
-Accessible via the **Upgrades** button on the preparation screen, the skill tree is structured as an interconnected node graph. Upgrades divide into four primary tracks:
+Accessible via the **Upgrades** button on the preparation screen, the skill tree is structured as an interconnected node graph. Upgrades divide into primary tracks:
 
 <div class="table-scroll">
 
-| Upgrade Track | In-Game Function | Strategic Role | Verified Milestone / Achievement |
+| Upgrade Track | In-Game Function | Strategic Role | Verification Status & Milestone |
 | --- | --- | --- | --- |
-| **Unit Type Unlocks** | Unlocks the six additional shapes (Square, Triangle, Hexagon, Pentagon, Diamond, Kite) | Expands tactical palette beyond starting Circles | *Fresh Recruits* (2nd unit), *Full Roster* (all 7 units) |
-| **Army Capacity** | Increases maximum soldier count placed onto the battlefield | Essential for scaling army numbers toward tens of thousands | *Full Muster* (unlock all units + buy all army capacity upgrades) |
-| **The King Branch** | Crowns a Circle unit into "The King" commander | Provides a powerful stat aura and defensive boost to surrounding formations | Launch client skill tree node |
-| **Shape Specializations** | Multipliers to specific shape performance (durability, pierce, spacing) | Specializes the army around chosen compositions | Verified branch nodes |
-| **Tree Mastery** | Overall node progression across the graph | Tracks total upgrades unlocked across the campaign | *Studied* (50% of tree), *Every Last Leaf* (100% of tree) |
+| **Unit Type Unlocks** | Unlocks additional unit types beyond starter shapes | Expands tactical army composition | **Verified** (*Fresh Recruits*: "Unlock a second unit type", *Full Roster*: "Unlock every unit type") |
+| **Army Capacity** | Increases maximum soldier count placed onto the battlefield | Scales army size toward tens of thousands | **Verified** (Store text: "army tens of thousands strong"; Achievement *Full Muster*: "Unlock every unit and buy every army capacity upgrade") |
+| **The King Branch** | Crowns a Circle unit into a commander | Provides commander aura to adjacent units | **Unverified / ❓** (Observed in-game node graph; not documented in store text or achievements) |
+| **Shape Specializations** | Upgrades specific shape attributes | Specializes army around chosen unit compositions | **Unverified / ❓** (Observed in-game node graph; specific passive stat modifiers not published) |
+| **Tree Mastery** | Overall progression across the skill tree | Tracks total upgrades unlocked across the campaign | **Verified** (*Studied*: "Own half of the skill tree", *Every Last Leaf*: "Own every single upgrade in the skill tree") |
 
 </div>
 
@@ -64,36 +66,38 @@ Accessible via the **Upgrades** button on the preparation screen, the skill tree
 
 ## 50-Level Campaign & City Fortress Milestones
 
-The campaign features 50 sequential levels. Every ten levels culminates in a fortified **City** encounter requiring strategic composition and flanking orders:
+The campaign features 50 sequential levels. Every ten levels culminates in a **City** encounter verified by the *Sacked* achievement:
 
 <div class="table-scroll">
 
-| Campaign Stage | Level Range | Key Encounter / Milestone | Verified Achievement |
-| --- | --- | --- | --- |
-| **The Opening March** | Levels 1–5 | Tutorial skirmishes; basic Circle swarms | *The March Begins* (Win battle 1), *First Steps* (Win level 5) |
-| **First City Siege** | Levels 6–10 | Level 10 City fortress; choke point battles | *Key to the City* (Win level 10), *Sacked* (Decisive on level 10) |
-| **The Advance** | Levels 11–20 | Level 20 City fortress; multi-unit enemy hordes | *No Turning Back* (Win level 20), *Sacked* (Decisive on level 20) |
-| **The Midpoint** | Levels 21–30 | Level 30 City fortress; river/building obstacles | *Over the Hill* (Win level 30), *Sacked* (Decisive on level 30) |
-| **The Long March** | Levels 31–40 | Level 40 City fortress; dense mass formations | *The Long March* (Win level 40), *Sacked* (Decisive on level 40) |
-| **The Grand Finale** | Levels 41–50 | Level 50 Imperial City; full-scale army clashes | *We March as One* (Win level 50), *Conqueror* (Decisive & Heroic on all 50) |
+| Level Range | Key Encounter / Milestone | Verified Achievement |
+| --- | --- | --- |
+| **Levels 1–5** | Introductory campaign battles | *The March Begins* ("Win your first battle"), *First Steps* ("Win level 5") |
+| **Levels 6–10** | Level 10 City milestone | *Key to the City* ("Win level 10"), *Sacked* (Decisive on level 10), *Man-at-Arms* (Decisive & Heroic on levels 1–10) |
+| **Levels 11–20** | Level 20 City milestone | *No Turning Back* ("Win level 20"), *Sacked* (Decisive on level 20), *Knight* (Decisive & Heroic on levels 11–20) |
+| **Levels 21–30** | Level 30 City milestone | *Over the Hill* ("Win level 30"), *Sacked* (Decisive on level 30), *Captain* (Decisive & Heroic on levels 21–30) |
+| **Levels 31–40** | Level 40 City milestone | *The Long March* ("Win level 40"), *Sacked* (Decisive on level 40), *Marshal* (Decisive & Heroic on levels 31–40) |
+| **Levels 41–50** | Level 50 City milestone & Campaign Victory | *We March as One* ("Win level 50"), *Sacked* (Decisive on level 50), *Grand Marshal* (Decisive & Heroic on levels 41–50), *Conqueror* (Decisive & Heroic on all 50) |
 
 </div>
 
 ### Victory Badges: Decisive and Heroic
 
 Levels can be cleared with performance ratings:
-- **DECISIVE**: Awarded for swift, overwhelming victories (*Decisive* achievement).
-- **HEROIC**: Awarded for high-efficiency survival or challenging constraints (*Heroic* achievement).
-- **Mastered**: Awarded for securing both DECISIVE and HEROIC ratings on the same stage (*Mastered* achievement; ranks scale from *Man-at-Arms* through *Grand Marshal* and *Conqueror*).
+- **DECISIVE**: Awarded for swift victories (*Decisive* achievement: "Earn a DECISIVE rating on any level").
+- **HEROIC**: Awarded for high-efficiency survival (*Heroic* achievement: "Earn a HEROIC rating on any level").
+- **Mastered**: Awarded for holding both ratings on the same stage (*Mastered* achievement: "Hold both DECISIVE and HEROIC ratings on the same level").
+- **Campaign Mastery Tiers**: Sequential achievements track holding both DECISIVE and HEROIC ratings across 10-level campaign tiers: *Man-at-Arms* (levels 1–10), *Knight* (levels 11–20), *Captain* (levels 21–30), *Marshal* (levels 31–40), *Grand Marshal* (levels 41–50), culminating in *Conqueror* (all 50 levels).
 
 ## Game Modes & Sandbox Progression
 
-Outside the linear 50-level Campaign, the game offers specialized game modes that share unlock mechanics:
+Outside the linear 50-level Campaign, the game features distinct modes confirmed by Steam achievements and store descriptions:
 
-- **Tactics Mode**: Fixed-army puzzles where troop placement and pre-battle MARCH/HOLD orders are the sole win condition (*Tactician* achievement).
-- **Command Mode**: Real-time tactical engagements featuring direct battlefield orders and abilities during active combat (*Hands On* achievement).
-- **Muster Mode**: Budget-limited puzzles where players select their own unit compositions within strict coin limits.
-- **Sandbox Mode & Level Editor**: Full level editor where players build custom maps and stage battles (*Blank Canvas* achievement). **Unlock Rule**: Troops and upgrades are unlocked in the Sandbox as they are encountered across Campaign, Tactics, Command, and Muster modes.
+- **Tactics Mode**: Tactical puzzle battles confirmed by the achievement **Tactician** ("Solve a Tactics board puzzle").
+- **Command Mode**: Direct battle engagements confirmed by the achievement **Hands On** ("Win a Command battle").
+- **Muster Mode (Unverified / ❓)**: Draft-style budget battles. Mentioned in community gameplay, but unreferenced in Steam store text or official achievement descriptions.
+- **Sandbox Mode & Level Editor**: Confirmed by the Steam store description and the achievement **Blank Canvas** ("Start a battle in the Sandbox").
+  - *Unlock Rules (Unverified / ❓)*: The mechanism where Sandbox elements unlock as they are encountered across game modes is observed in-game client behavior and is not documented in public store copy.
 
 ## What is Verified vs. Unverified
 
@@ -102,13 +106,16 @@ Outside the linear 50-level Campaign, the game offers specialized game modes tha
 | Detail | Status | Fact Basis |
 | --- | --- | --- |
 | 50 Campaign Levels | **Verified** | Official Steam achievements (*Key to the City*, *We March as One*). |
-| City Levels at 10, 20, 30, 40, 50 | **Verified** | Steam achievement *Sacked*. |
-| Gold rewarded on win and loss | **Verified** | Store description and achievement *Lessons Learned*. |
-| Fallen troops persist across battles | **Verified** | Store description and campaign army persistence rule. |
-| No skill-tree respecs in campaign | **Verified** | Campaign node purchasing mechanism. |
-| Sandbox unlock via mode encounters | **Verified** | Store description and Sandbox progression rules. |
-| Exact gold cost scaling per node tier | **Unverified (未核实)** | Early nodes start around ~250 gold and reach ~1,000+ gold in deep tiers; exact per-node values across patches are unverified. |
-| Exact gold drop bounty per enemy shape | **Unverified (未核实)** | Enemies yield gold on defeat, but exact per-shape coin values are not printed in official docs. |
-| Exact percentage buffs on passive nodes | **Unverified (未核实)** | Tooltips do not display raw percentage stat sheets. |
+| City Levels at 10, 20, 30, 40, 50 | **Verified** | Official Steam achievement *Sacked* ("Earn DECISIVE on a city level (Level 10, 20, 30, 40, or 50)"). |
+| Gold rewarded on win and loss | **Verified** | Official Steam store description and achievement *Lessons Learned*. |
+| Fallen troops persist across battles | **Verified** | Official Steam store description ("Fallen troops return for the next battle, so you keep the army you have built"). |
+| Decisive and Heroic ratings | **Verified** | Official Steam achievements (*Decisive*, *Heroic*, *Mastered*, *Conqueror*). |
+| Tactics, Command, and Sandbox modes | **Verified** | Official Steam store page and achievements (*Tactician*, *Hands On*, *Blank Canvas*). |
+| No skill-tree respecs in campaign | **Unverified / ❓** | Observed in-game client purchasing behavior; no official store documentation confirms permanent respec locking. |
+| Sandbox unlock via mode encounters | **Unverified / ❓** | Observed in-game client unlock trigger; store text notes level editor existence but not unlock mechanics. |
+| Muster game mode | **Unverified / ❓** | Present in game client; not referenced in official Steam store text or achievements. |
+| Exact gold cost scaling per node tier | **Unverified / ❓** | In-game skill tree costs scale across tiers, but exact per-node values are not published in official documentation. |
+| Exact gold drop bounty per enemy shape | **Unverified / ❓** | Enemies yield gold on defeat, but exact per-shape coin values are not printed in official docs. |
+| Exact percentage buffs on passive nodes | **Unverified / ❓** | In-game skill tree does not publish raw percentage stat cards. |
 
 </div>
