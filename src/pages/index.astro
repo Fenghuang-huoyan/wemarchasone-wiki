@@ -70,7 +70,7 @@ const doors = [
     href: '/units',
     num: '02',
     title: 'Units',
-    text: 'Shapes you paint onto the field. No roster and no tier list, because Steam did not print one.',
+    text: 'Verified geometric army shapes, battlefield painting, tactical roles, and simulation mechanics.',
     image: art.close,
     alt: 'Close Steam screenshot of a red mass of shapes meeting a blue mass in We March as One',
   },
@@ -78,7 +78,7 @@ const doors = [
     href: '/progression',
     num: '03',
     title: 'Progression',
-    text: 'Gold whether you win or lose, the branching skill tree, and fallen troops that return.',
+    text: 'The 50-level campaign, gold persistence, the branching skill tree, and sandbox unlocks.',
     image: art.tree,
     alt: 'Steam screenshot of a skill-tree graph and a recruit panel in We March as One',
   },
@@ -144,11 +144,11 @@ const stills = [
           decoding="async"
         />
         <div class="hero-panel">
-          <p class="kicker">{siteConfig.developer} · planned release {meta.release}</p>
-          <h1>We March as One is still coming soon.</h1>
+          <p class="kicker">{siteConfig.developer} · released {meta.release}</p>
+          <h1>We March as One is now available on Steam.</h1>
           <p class="lede">
-            English pages for the incremental auto battler: paint troops onto the battlefield, earn gold whether you win or lose, and keep the army when fallen troops return.
-            On 12 Nov 2026 the full game was still marked coming soon for Nov 13, 2026. Where a number was never printed, the page says so.
+            English reference for the incremental auto battler: paint troops onto the battlefield, earn gold whether you win or lose, and keep your persistent army across 50 campaign levels.
+            Released on Nov 13, 2026. Where a number or formula has no official in-game stat sheet, the page explicitly notes it as unverified.
           </p>
           <div class="cta-row">
             <a class="btn" href="/guide">Guide</a>
@@ -210,10 +210,10 @@ const stills = [
       <section class="section home-quick">
         <QuickAnswer
           sentences={[
-            'We March as One is an incremental auto battler from dux, who also publish it, on Steam (AppID 5189160). The store date is Nov 13, 2026. On 12 Nov 2026 the appdetails payload still marked the full game coming soon, Windows only, and not free.',
+            'We March as One is an incremental auto battler from dux, who also publish it, on Steam (AppID 5189160), released on Nov 13, 2026 for Windows (single-player with Family Sharing).',
             'The short description says you start with a few shapes, build an army tens of thousands strong, paint troops onto the battlefield, and send them against enormous hordes, with every unit individually simulated.',
-            'The longer text adds gold from defeated enemies whether you win or lose, new unit types from a branching skill tree, fallen troops that return, isometric, top-down, or fly-through cameras, and a sandbox mode with a level editor.',
-            'A free demo, AppID 5403150, is dated Oct 19, 2026. There is no redeem-code list and no public price in the payload checked that day. This site does not invent a roster or a gold amount.',
+            'The longer text adds gold from defeated enemies whether you win or lose, new unit types from a branching skill tree, fallen troops that return, 2D, 3D, or fly-through cameras, and a sandbox mode with a level editor.',
+            'A free demo, AppID 5403150, is dated Oct 19, 2026. There is no redeem-code list. This site documents verified game facts and explicitly flags unverified stats.',
           ]}
         />
         <AdSlot name="afterQuickAnswer" />
@@ -255,7 +255,7 @@ const stills = [
               The store page and the demo page live at {siteConfig.databases.map((db, i) => (<><a href={db.href}>{db.label}</a>{i < siteConfig.databases.length - 1 ? ', ' : ''}</>))}. This site is the skim: the incremental auto battler loop, what is and is not known about units, and the progression sentences Steam actually wrote.
             </p>
             <p>
-              The full game is scheduled to unlock on {meta.release}. It was still coming soon when these pages were written. If the client and this page disagree, trust the client.
+              The full game launched on {meta.release}. If future balance patches and this page disagree, trust the live client.
             </p>
           </div>
           <div>

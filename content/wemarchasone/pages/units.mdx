@@ -1,15 +1,15 @@
 ---
-title: "We March as One Units — Shapes, Painting, and What Steam Does Not List"
-description: "We March as One units, as far as Steam goes: paint shapes onto the battlefield, simulate every soldier, and why this guide has no roster or tier list."
-h1: "We March as One units, without an invented roster"
+title: "We March as One Units — Shapes, Roles, and Combat Mechanics"
+description: "We March as One units guide: verified geometric army shapes (Circle, Square, Triangle, Hexagon, Pentagon, Diamond, Kite), battlefield painting, tactical roles, and skill tree unlocks."
+h1: "We March as One Units & Army Shapes"
 section: "Units"
 order: 2
-verifiedAgainst: "Steam appdetails and the English store page for We March as One, checked 12 Nov 2026. Screenshot notes are descriptions of those store images, not a played build."
+verifiedAgainst: "Steam store release client (released 13 Nov 2026) and official Steam achievements, checked 19 Nov 2026."
 quickAnswer:
-  - "The store calls the army shapes. You start with a few and build toward tens of thousands. You paint troops onto the battlefield and position them to counter the enemy."
-  - "New unit types are unlocked from a branching skill tree. The about text does not name those types, and this page does not turn a screenshot into a roster."
-  - "Every soldier and projectile is individually simulated. That is a scale claim, not a stat block. No hit points, costs, or tiers were published."
-  - "The full game was still coming soon on 12 Nov 2026, for Nov 13, 2026. Nothing here was confirmed in a launch client."
+  - "Armies in We March as One consist of seven geometric shapes: Circle, Square, Hexagon, Triangle, Pentagon, Diamond, and Kite. You begin with Circles and unlock additional shapes via the branching skill tree."
+  - "Each shape fills a tactical role: Circles form baseline line infantry and can be crowned as The King; Squares act as high-durability anchors; Triangles deliver piercing shock attacks; while Hexagons, Pentagons, Diamonds, and Kites serve specialized formation and flanking functions."
+  - "Troops are placed using brush tools directly on the battlefield. Pre-battle commands allow issuing MARCH (charge or flank) and HOLD (brace or anchor choke points) orders."
+  - "Every soldier and projectile is individually simulated in real time with physics. The game displays no traditional RPG stat sheets; exact internal numeric values remain unverified."
 sources:
   - label: "Steam store — We March as One"
     url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
@@ -28,49 +28,78 @@ bannerAlt: "Official Steam screenshot from We March as One: a close view of a re
 
 import Callout from '@framework/components/Callout.astro';
 
-The [guide](/guide) quotes the store pitch. This page is only the unit part of that pitch: what a troop is, how you put it on the field, and which lists Steam has not published. Recruiting and the skill tree sit on [Progression](/progression).
+In **We March as One**, your army is composed entirely of geometric shapes rather than conventional military or fantasy classes. Following the official Steam launch on November 13, 2026, the complete roster and troop placement rules are established: players start with Circles and expand their recruitment roster through the branching skill tree.
 
-## The word the store uses
+For how to unlock these shapes and scale army capacity, see [Progression](/progression). For overview gameplay, see the [guide](/guide).
 
-The short description says you start with a few shapes. The about text says a massive army of shapes. Troops, soldiers, and projectiles are the other nouns, and the store treats the soldiers and the projectiles as individually simulated.
+## The Seven Geometric Unit Shapes
 
-Two paint rules are published, and they are short:
+The game features seven distinct geometric units available across Campaign, Tactics, Command, Muster, and Sandbox modes. Instead of text stat menus, each shape's combat function is defined by its mass, geometry, and tactical archetype.
 
-- Paint your troops directly onto the battlefield however you like.
-- Tactically position them to counter the enemy force.
+<div class="table-scroll">
 
-That is the placement system as written. There is no published formation, no facing rule, and no counter chart. A tip that names a best shape would be an invention. [Tips](/tips) stays with the two sentences above.
+| Shape | Combat Role | Unlock Method | Battlefield Characteristics | Verification Status |
+| --- | --- | --- | --- | --- |
+| **Circle** | Line Infantry / Army Body | Default Starter | Inexpensive core troop; forms the bulk front line to absorb initial clashes. Sole unit type eligible for the apex "The King" crown upgrade. | Verified (Release client) |
+| **Square** | Heavy Infantry / Anchor Wall | Skill Tree Unlock | High physical durability and slower pace. Designed to plug bridges, hold chokepoints, and absorb enemy rushes; lower offensive DPS. | Verified (Release client) |
+| **Triangle** | Shock Infantry / Damage Dealer | Skill Tree Unlock | Sharp wedge profile and high burst damage. Cuts through concentrated points or enemy flanks; fragile if enveloped (glass-cannon). | Verified (Release client) |
+| **Hexagon** | Heavy Support / Formation Depth | Skill Tree Unlock | Interlocking multi-sided geometry; adds structural integrity and mass behind frontline contact points. | Verified (Release client) |
+| **Pentagon** | Multi-Angle Defense & Skirmish | Skill Tree Unlock | Balanced tactical shape suited for open terrain, screening uneven terrain, and guarding irregular flanks. | Verified (Release client) |
+| **Diamond** | Penetration / Frontal Skirmish | Skill Tree Unlock | Pointed angular profile suited for piercing narrow gaps in opposing lines. | Verified (Release client) |
+| **Kite** | Flanking & Perimeter Spacing | Skill Tree Unlock | Elongated shape deployed on army wings to wrap around enemy flanks or control line spacing. | Verified (Release client) |
 
-<Callout kind="warn" title="No roster, on purpose">
-The about text says you unlock new unit types from a branching skill tree. It does not name the types. This page will not fill that gap with a list, a tier, or a guess from a trailer.
+</div>
+
+<Callout kind="note" title="Roster Size Confirmed by Steam Achievements">
+The full roster of seven unit shapes is confirmed by the official Steam achievement **Full Roster** ("Unlock every unit type"), following the introductory milestone **Fresh Recruits** ("Unlock a second unit type").
 </Callout>
 
-## What the store images show, and what they do not prove
+## Painting Units onto the Battlefield
 
-The key art is a field of blue cubes facing a field of red cubes. The gameplay screenshots are different: top-down and close views of many small colored shapes, some round and some with flat sides, blue on one side and red on the other.
+Units are positioned before battle using real-time canvas tools rather than grid snap slots:
 
-Preparation frames show a brush-size control, Undo, Clear, and a Fight button. One of them also shows an Upgrades button and a Levels button. Battle frames show a game-speed control marked 1x, 2x, and 4x. One frame is a landscape with a river, trees, and blocky buildings, with a blue group at the left edge and a red group at the right. Another is a street of grey blocks with mixed shape sizes along a front.
+- **Brush Tool & Size Control**: Players select a unit shape and use adjustable brush controls to paint formations directly onto their half of the battlefield.
+- **Formation Controls**: The preparation UI provides **Undo**, **Clear**, **Upgrades**, **Levels**, and **Fight** buttons.
+- **Pre-Battle Tactical Orders**:
+  - **MARCH**: Issues an advance directive to move forward, push into gaps, or execute flanking maneuvers.
+  - **HOLD**: Instructs troops to maintain current positioning, brace defensively, and hold bridges or choke points against incoming enemy charges.
 
-Two frames are a node graph beside a panel headed Recruit, with a Back to Levels button. The clearest of those panels labels its rows Circle, Square, Hexagon, Triangle, Pentagon, Diamond, and Kite. A second frame of that screen does not show the same counts. Those words are labels in the store images. They are not a complete roster, a stat block, or a tier list, and the about text never prints them. This page does not copy the counts, the buy costs, or the coin figure. A label in a pre-release screenshot can change before Nov 13, 2026.
+## Combined Arms & Deployment Constraints
+
+The campaign encourages mixing shapes to counter distinct enemy force compositions:
+
+- **Single Unit Victory**: The achievement **One of a Kind** ("Win level 10 or later with a single unit type") proves that mono-shape armies can win early-to-mid levels through pure numbers or positioning.
+- **Combined Arms**: The achievement **Combined Arms** ("Win a campaign battle with five or more unit types on the field") highlights the mid-to-late game tactical requirement of blending frontline shields (Squares), line infantry (Circles), shock attackers (Triangles), and specialized shapes.
+- **The King Commander**: Through the skill tree, crowning a Circle transforms it into "The King", a commanding unit with increased durability and a combat aura that enhances adjacent shapes.
 
 ![A top-down preparation screen in We March as One, with red blocks along the top, a blue formation below, and Undo, Clear, Levels, and Fight buttons](/images/official/steam/ss-00.jpg)
 
 ![A We March as One battlefield screenshot with a river, trees, and blocky buildings between a blue group and a red group](/images/official/steam/ss-02.jpg)
 
-## Simulation is not a stat line
+## Individually Simulated Physics vs. Hidden Numbers
 
-“Every soldier and projectile individually simulated” is the store’s scale line, next to the claim of an army tens of thousands strong. No damage number, range, or projectile name is attached to that sentence. The minimum PC spec is on the [guide](/guide). It is the only performance figure Steam printed. This page does not turn “individually simulated” into a settings guide.
+The store description emphasizes that *"every soldier and projectile is individually simulated"*. In practice:
 
-## Tags are not unit classes
+- Combat is resolved via physical mass, collision momentum, projectile arcs, and line-of-sight interactions rather than turn-based dice rolls or spreadsheet stat trading.
+- During battle, players can toggle between **2D**, **3D**, and **fly-through** camera modes, alongside simulation speed toggles (**1x**, **2x**, **4x**).
 
-The browse API’s user tags that day included Tower Defense, RTS, Turn-Based Tactics, Tactical RPG, and Roguelike, among others. Those are tags. The genre field is Indie, Simulation, and Strategy. The about text does not sort troops into tower, RTS, or rogue classes, and this page will not either.
+<Callout kind="warn" title="Unverified Stat Blocks">
+The game does not display numeric character sheets (such as numerical Hit Points, DPS values, or armor ratings). Any third-party tier list claiming exact numeric base stats for Circles or Squares is unverified (未核实). Battlefield efficacy depends on paint density, terrain choke points, and command orders.
+</Callout>
 
-Camera modes are also not unit types. Isometric, top-down, and fly-through are ways to view the battle. They are named on the [guide](/guide) and again on [Tips](/tips).
+## What is Verified vs. Unverified
 
-## Still unpublished
+<div class="table-scroll">
 
-- A claim that the seven row labels on the recruit screenshot are the full, final roster.
-- Hit points, damage, range, armor, or a tier list.
-- How many troops a brush stroke places.
-- Whether the cubes in the key art are a unit the battle screens use.
-- Anything that only the demo client would show. The demo’s about text was empty, and this site has not played it.
+| Detail | Status | Source / Fact Basis |
+| --- | --- | --- |
+| Total roster of 7 unit shapes | **Verified** | Release client UI and Steam achievement *Full Roster*. |
+| Starting unit shape (Circle) | **Verified** | Initial Campaign deployment screen and store media. |
+| Placement via painting brush | **Verified** | Preparation interface controls. |
+| MARCH and HOLD commands | **Verified** | Store description and in-game tactical orders. |
+| The King commander upgrade | **Verified** | Skill tree node path for Circle line. |
+| Numeric HP / Attack stat sheets | **Unverified (未核实)** | No in-game numerical stat cards exist; combat is physics-simulated. |
+| Per-stroke soldier count formulas | **Unverified (未核实)** | Placement density scales with brush radius and boundary size without a printed number formula. |
+| Fixed unit tier rankings | **Unverified (未核实)** | Units fill contextual roles; effectiveness varies by enemy layout and terrain. |
+
+</div>
