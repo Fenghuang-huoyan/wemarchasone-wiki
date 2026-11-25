@@ -41,48 +41,20 @@ body {
   min-height: 100vh;
   background-color: var(--bg);
   background-image:
-    var(--gutter-grain),
-    radial-gradient(820px 520px at -8% -6%, rgba(47, 109, 255, 0.2), transparent 62%),
-    radial-gradient(760px 520px at 108% -4%, rgba(61, 90, 138, 0.38), transparent 60%),
-    radial-gradient(560px 680px at 0% 72%, rgba(255, 210, 122, 0.08), transparent 68%),
-    radial-gradient(520px 460px at 100% 88%, rgba(47, 109, 255, 0.12), transparent 70%),
-    linear-gradient(180deg, #121820 0%, #14181f 240px, #14181f 100%);
-  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-  background-size: 160px 160px, auto, auto, auto, auto, auto;
+    radial-gradient(ellipse 58% 42% at 15% 0%, rgba(47, 109, 255, 0.16), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 88% 8%, rgba(255, 210, 122, 0.09), transparent 70%),
+    radial-gradient(rgba(183, 192, 206, 0.075) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
-/* Gutter motif sits outside the 96rem shell. Below ~1800px the shell is already nearly full-bleed. */
 body::before,
 body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  z-index: 0;
-  width: max(0px, calc((100% - var(--content)) / 2));
-  pointer-events: none;
-  background-image:
-    var(--gutter-art),
-    repeating-linear-gradient(118deg, rgba(47, 109, 255, 0.18) 0 2px, transparent 2px 26px),
-    repeating-linear-gradient(118deg, transparent 0 12px, rgba(255, 210, 122, 0.22) 12px 14px),
-    linear-gradient(180deg, rgba(30, 51, 88, 0.55), rgba(20, 24, 31, 0.25) 46%, rgba(47, 109, 255, 0.22));
-  background-repeat: repeat-y, repeat, repeat, no-repeat;
-  background-size: min(100%, 240px) 720px, auto, auto, auto;
-  background-position: center top, 0 0, 0 0, 0 0;
-}
-body::before { left: 0; }
-body::after {
-  right: 0;
-  transform: scaleX(-1);
-  background-position: center 180px, 0 0;
-}
-@media (max-width: 1799px) {
-  body::before,
-  body::after { display: none; }
+  display: none !important;
 }
 main,
 .site-footer {
@@ -245,12 +217,13 @@ button, input, select { font: inherit; color: inherit; }
 
 .town-hero {
   position: relative;
+  display: grid;
   margin: 0.35rem 0 0;
-  border-radius: 22px;
+  border-radius: 16px;
   overflow: hidden;
   background: #0e1218;
-  border: 3px solid var(--line);
-  box-shadow: 8px 8px 0 rgba(47, 109, 255, 0.4);
+  border: 2px solid var(--line);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 .hero-art {
   width: 100%;
@@ -265,13 +238,19 @@ button, input, select { font: inherit; color: inherit; }
   background: #14181f;
 }
 @media (min-width: 800px) {
+  .hero-art {
+    grid-area: 1 / 1;
+    height: 100%;
+    min-height: 360px;
+    aspect-ratio: auto;
+  }
   .hero-panel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 4.5rem 1.6rem 1.35rem;
-    background: linear-gradient(180deg, rgba(20, 24, 31, 0.55) 0%, rgba(20, 24, 31, 0.78) 32%, rgba(20, 24, 31, 0.94) 68%, #14181f 100%);
+    grid-area: 1 / 1;
+    align-self: end;
+    position: relative;
+    z-index: 2;
+    padding: 3.2rem 1.75rem 1.4rem;
+    background: linear-gradient(180deg, rgba(20, 24, 31, 0.28) 0%, rgba(20, 24, 31, 0.82) 38%, rgba(20, 24, 31, 0.96) 100%);
   }
 }
 .kicker {

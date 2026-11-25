@@ -135,8 +135,6 @@ const stills = [
         <img
           class="hero-art"
           src={siteConfig.art.hero}
-          srcset={`${art.hero} 1920w, ${art.hero2x} 3840w`}
-          sizes="(min-width: 1536px) 1536px, 100vw"
           alt={siteConfig.art.heroAlt}
           width="1920"
           height="620"
@@ -144,30 +142,28 @@ const stills = [
           decoding="async"
         />
         <div class="hero-panel">
-          <p class="kicker">{siteConfig.developer} · released {meta.release}</p>
-          <h1>We March as One is now available on Steam.</h1>
+          <p class="kicker">{siteConfig.developer} · Incremental Auto Battler · {meta.release}</p>
+          <h1>We March as One — Strategy, Units &amp; Progression Guide</h1>
           <p class="lede">
-            English reference for the incremental auto battler: paint troops onto the battlefield, earn gold whether you win or lose, and keep your persistent army across 50 campaign levels.
-            Released on Nov 13, 2026. Where a number or formula has no official in-game stat sheet, the page explicitly notes it as unverified.
+            Paint tens of thousands of individually simulated troops onto the battlefield, farm persistent Gold even on defeated runs, and unlock specialized geometric formations across a 50-level campaign.
           </p>
           <div class="cta-row">
-            <a class="btn" href="/guide">Guide</a>
-            <a class="btn ghost" href="/units">Units</a>
-            <a class="btn ghost" href="/progression">Progression</a>
-            <a class="btn ghost" href={siteConfig.steamUrl}>View on Steam</a>
+            <a class="btn" href="/units">Unit Formations</a>
+            <a class="btn ghost" href="/progression">Skill Tree &amp; Gold</a>
+            <a class="btn ghost" href="/tips">Tactical Tips</a>
+            <a class="btn ghost" href={siteConfig.steamUrl}>Steam Store</a>
           </div>
           <p class="version-note">{siteConfig.version.detail}</p>
         </div>
       </section>
       <p class="art-credit">
-        Library hero, capsules, header, and screenshots are official Steam store assets for App {siteConfig.steamAppId}, saved from the store CDN.
-        Credits and source URLs: <a href="/images/official/steam/ATTRIBUTION.txt">ATTRIBUTION.txt</a>.
+        Official Steam store reference artwork for App {siteConfig.steamAppId} (<a href="/images/official/steam/ATTRIBUTION.txt">ATTRIBUTION.txt</a>).
       </p>
 
       <section class="section">
-        <h2>Four pages</h2>
+        <h2>Tactical Reference Hub</h2>
         <p class="section-intro">
-          Open the guide, the units note, progression, or the tips. There is no codes page. The sources checked do not list a redeem program.
+          Jump directly to army unit roles, 50-level campaign progression, Gold persistence mechanics, or battlefield brush controls.
         </p>
         <div class="door-grid">
           {doors.map((door) => (

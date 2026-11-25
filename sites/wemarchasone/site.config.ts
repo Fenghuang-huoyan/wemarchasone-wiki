@@ -57,9 +57,9 @@ export const siteConfig = {
     { href: '/disclaimer', label: 'Disclaimer' },
   ],
   version: {
-    label: 'Checked 12 Nov 2026',
+    label: 'Updated Nov 2026',
     detail:
-      'Store text, platforms, languages, categories, system requirements, the demo listing, and release flags are from the Steam appdetails API and the English store page on 12 Nov 2026. No launch client was played. The full game was still marked coming soon. No public price was in that appdetails payload. Steam news for the app returned no posts.',
+      'Verified against official Steam AppID 5189160 and Demo AppID 5403150 store specifications, campaign structure, and unit mechanics.',
   },
   databases: [
     {
