@@ -17,7 +17,15 @@
   </div>
 
   <div class="wmao-wave-bar">
-    <label class="wmao-wave-select">
+    <div class="wmao-preset-bar" role="group" aria-label="Tactical army presets">
+      <span class="preset-kicker">Quick Loadouts:</span>
+      <button type="button" class="wmao-preset-chip is-active" data-wmao-preset="lv5">Lv.5 Anti-Archer</button>
+      <button type="button" class="wmao-preset-chip" data-wmao-preset="lv10">Lv.10 Fortress Siege</button>
+      <button type="button" class="wmao-preset-chip" data-wmao-preset="lv15">Lv.15 Anti-Cav Wall</button>
+      <button type="button" class="wmao-preset-chip" data-wmao-preset="lv25">Lv.25 Boss Counter</button>
+      <button type="button" class="wmao-preset-chip reset-chip" data-wmao-preset="clear">Clear</button>
+    </div>
+    <label class="wmao-wave-select" for="wmao-level-select">
       <span>Target Campaign Wave (Enemy Roster from Client)</span>
       <select id="wmao-level-select"></select>
     </label>
@@ -124,7 +132,17 @@
     <label><input type="checkbox" id="pk-chest" /> <span>War Chest (+10% Gold)</span></label>
   </div>
 
-  <div class="wmao-results" role="status" aria-live="polite">
+  <div class="wmao-meter-wrap" aria-hidden="true">
+    <div class="wmao-meter-labels">
+      <span>Combat Power Balance</span>
+      <span id="wmao-meter-pct">1.23x (2★ Decisive Threshold: 1.15x)</span>
+    </div>
+    <div class="wmao-meter-track">
+      <div class="wmao-meter-fill is-win" id="wmao-meter-fill" style="width: 62%;"></div>
+    </div>
+  </div>
+
+  <div class="wmao-results" role="status" aria-live="polite" aria-atomic="true">
     <div class="res-box">
       <span class="r-kicker">Your Army Value vs. Wave</span>
       <strong id="res-gold-val">0g vs 508g</strong>
@@ -135,12 +153,12 @@
       <strong id="res-hp-dps">0 HP · 0 DPS</strong>
       <small id="res-counter-note">Includes armor &amp; type counters</small>
     </div>
-    <div class="res-box">
+    <div class="res-box res-verdict-card" id="res-verdict-box">
       <span class="r-kicker">Wave Outcome Estimate</span>
       <strong id="res-verdict" class="verdict-badge">—</strong>
       <small id="res-ratio-note">Power ratio: 1.00x</small>
     </div>
-    <div class="res-box">
+    <div class="res-box res-gold-card">
       <span class="r-kicker">Expected Gold Payout</span>
       <strong id="res-payout">0g – 0g</strong>
       <small id="res-loss-floor">Loss kill floor (40%): 0g</small>
@@ -344,7 +362,49 @@
         baseClear.toLocaleString('en-US') + 'g – ' + masterClear.toLocaleString('en-US') + 'g';
       document.getElementById('res-loss-floor').textContent =
         'Even on defeat (~40% kill bounty): ~' + lossKillGold.toLocaleString('en-US') + 'g';
+
+      const meterFill = document.getElementById('wmao-meter-fill');
+      const meterPct = document.getElementById('wmao-meter-pct');
+      const verdictBox = document.getElementById('res-verdict-box');
+      if (meterFill && meterPct) {
+        const pct = Math.max(4, Math.min(100, Math.round((ratio / 1.8) * 100)));
+        meterFill.style.width = pct + '%';
+        meterFill.className = 'wmao-meter-fill ' + vClass;
+        meterPct.textContent = ratio.toFixed(2) + 'x Power Ratio (1★ ≥0.88x · 2★ ≥1.15x · 3★ ≥1.55x)';
+      }
+      if (verdictBox) {
+        verdictBox.className = 'res-box res-verdict-card ' + vClass;
+      }
     }
+
+    const PRESETS = {
+      lv5:  { lvIdx: 4,  units: { 0: 80, 1: 30, 2: 20, 3: 45, 4: 0, 6: 0, 7: 0, 8: 0 }, king: true, arms: false, blades: false, mail: false, bastion: false },
+      lv10: { lvIdx: 9,  units: { 0: 150, 1: 80, 2: 260, 3: 40, 4: 2, 6: 0, 7: 0, 8: 0 }, king: true, arms: true, blades: true, mail: true, bastion: false },
+      lv15: { lvIdx: 14, units: { 0: 200, 1: 950, 2: 180, 3: 0, 4: 2, 6: 2, 7: 0, 8: 0 }, king: true, arms: true, blades: false, mail: true, bastion: true },
+      lv25: { lvIdx: 24, units: { 0: 600, 1: 500, 2: 400, 3: 200, 4: 8, 6: 12, 7: 10, 8: 8 }, king: true, arms: true, blades: true, mail: true, bastion: true },
+      clear:{ lvIdx: null, units: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 6: 0, 7: 0, 8: 0 }, king: false, arms: false, blades: false, mail: false, bastion: false }
+    };
+
+    const presetBtns = document.querySelectorAll('[data-wmao-preset]');
+    presetBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-wmao-preset');
+        const p = PRESETS[key];
+        if (!p) return;
+        presetBtns.forEach((b) => b.classList.toggle('is-active', b === btn && key !== 'clear'));
+        if (p.lvIdx !== null) sel.value = String(p.lvIdx);
+        Object.keys(p.units).forEach((uid) => {
+          const inp = document.querySelector('[data-uinput="' + uid + '"]');
+          if (inp) inp.value = String(p.units[uid]);
+        });
+        document.getElementById('pk-king').checked = p.king;
+        document.getElementById('pk-arms').checked = p.arms;
+        document.getElementById('pk-blades').checked = p.blades;
+        document.getElementById('pk-mail').checked = p.mail;
+        document.getElementById('pk-bastion').checked = p.bastion;
+        calc();
+      });
+    });
 
     sel.addEventListener('change', calc);
     document.querySelectorAll('[data-uinput], .wmao-perks input').forEach((el) => {
@@ -358,12 +418,62 @@
 <style>
   .wmao-calc {
     margin: 1rem 0 1.6rem;
-    padding: 1.1rem;
-    border-radius: 10px;
-    border: 1px solid rgba(110, 145, 205, 0.35);
-    background: rgba(18, 24, 34, 0.65);
+    padding: 1.2rem 1.25rem;
+    border-radius: 14px;
+    border: 1px solid rgba(96, 165, 250, 0.34);
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(37, 99, 235, 0.14) 0%, transparent 55%),
+      linear-gradient(180deg, #111827 0%, #0b101b 100%);
+    box-shadow: 0 14px 32px rgba(3, 7, 18, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     box-sizing: border-box;
     max-width: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+  .wmao-preset-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.38rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  }
+  .preset-kicker {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+    margin-right: 0.2rem;
+  }
+  .wmao-preset-chip {
+    min-height: 2rem;
+    padding: 0.24rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+    color: #dbeafe;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+  .wmao-preset-chip:hover {
+    background: rgba(59, 130, 246, 0.18);
+    border-color: rgba(96, 165, 250, 0.55);
+    color: #ffffff;
+  }
+  .wmao-preset-chip.is-active {
+    background: #2563eb;
+    border-color: #60a5fa;
+    color: #ffffff;
+  }
+  .wmao-preset-chip.reset-chip {
+    margin-left: auto;
+    color: #fca5a5;
+    border-color: rgba(248, 113, 113, 0.3);
+  }
+  .wmao-preset-chip.reset-chip:hover {
+    background: rgba(239, 68, 68, 0.16);
+    border-color: #f87171;
   }
   .wmao-badge-row {
     display: flex;
@@ -418,14 +528,16 @@
   }
   .wmao-wave-select select {
     width: 100%;
+    min-height: 2.75rem;
     max-width: 100%;
     box-sizing: border-box;
-    padding: 0.48rem 0.6rem;
-    border-radius: 6px;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
     border: 1px solid rgba(128, 150, 185, 0.45);
-    background: #141923;
-    color: #f0f4fa;
-    font-size: 0.88rem;
+    background: #090d16;
+    color: #f8fafc;
+    font-size: 0.9rem;
+    font-weight: 600;
   }
   .wmao-enemy-summary {
     font-size: 0.8rem;
@@ -474,15 +586,56 @@
   }
   .wmao-unit-card input {
     width: 100%;
+    min-height: 2.5rem;
     box-sizing: border-box;
-    padding: 0.38rem 0.5rem;
-    border-radius: 5px;
-    border: 1px solid rgba(128, 150, 185, 0.4);
-    background: #10151e;
+    padding: 0.42rem 0.6rem;
+    border-radius: 7px;
+    border: 1px solid rgba(148, 163, 184, 0.34);
+    background: #080c14;
     color: #ffffff;
-    font-size: 0.88rem;
-    font-weight: 600;
+    font-size: 0.92rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
   }
+  .wmao-unit-card input:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.24);
+    outline: none;
+  }
+  .wmao-meter-wrap {
+    margin: 0 0 0.85rem;
+    padding: 0.65rem 0.8rem;
+    border-radius: 9px;
+    background: rgba(9, 13, 22, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+  }
+  .wmao-meter-labels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    margin-bottom: 0.4rem;
+  }
+  .wmao-meter-track {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.16);
+    overflow: hidden;
+  }
+  .wmao-meter-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 220ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 200ms ease;
+  }
+  .wmao-meter-fill.v-master { background: linear-gradient(90deg, #10b981, #34d399); }
+  .wmao-meter-fill.v-win { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+  .wmao-meter-fill.v-close { background: linear-gradient(90deg, #d97706, #fbbf24); }
+  .wmao-meter-fill.v-lose { background: linear-gradient(90deg, #dc2626, #f87171); }
   .wmao-perks {
     display: flex;
     flex-wrap: wrap;
@@ -513,15 +666,21 @@
     border-top: 1px solid rgba(255, 255, 255, 0.14);
   }
   .res-box {
-    padding: 0.6rem 0.7rem;
-    border-radius: 7px;
-    background: rgba(10, 14, 20, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.7rem 0.82rem;
+    border-radius: 9px;
+    background: rgba(11, 16, 27, 0.82);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-left: 3px solid #475569;
     display: flex;
     flex-direction: column;
-    gap: 0.18rem;
+    gap: 0.2rem;
     min-width: 0;
   }
+  .res-verdict-card.v-master { border-left-color: #10b981; background: rgba(16, 185, 129, 0.08); }
+  .res-verdict-card.v-win { border-left-color: #3b82f6; background: rgba(59, 130, 246, 0.08); }
+  .res-verdict-card.v-close { border-left-color: #f59e0b; background: rgba(245, 158, 11, 0.08); }
+  .res-verdict-card.v-lose { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.08); }
+  .res-gold-card { border-left-color: #fbbf24; }
   .r-kicker {
     font-size: 0.71rem;
     text-transform: uppercase;
