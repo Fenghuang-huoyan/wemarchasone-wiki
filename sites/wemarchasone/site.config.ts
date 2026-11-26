@@ -13,9 +13,9 @@ export const siteConfig = {
   locale: 'en',
   themeColor: '#14181f',
   contentRoot: 'wemarchasone',
-  homeTitle: 'We March as One Guide — Incremental Auto Battler, Release, and Army',
+  homeTitle: 'We March as One Database & Army Calculator — Unpacked Unit Stats & Skill Tree',
   homeDescription:
-    'Unofficial English guide to We March as One (Steam AppID 5189160). dux’s incremental auto battler, still coming soon for Nov 13, 2026. Paint troops, gold, and the skill tree in the store’s own words. Not affiliated with dux or Valve.',
+    'Unpacked We March as One unit stats, wave calculator, 62-node skill tree costs, and armor counter matrix from Demo Build #26192930 (Steam AppID 5189160 / 5403150).',
   analytics: {
     gaId: 'G-SDWYYDDBP3',
   },
@@ -36,9 +36,10 @@ export const siteConfig = {
     'wemarchasone.wiki is an unofficial fan-made guide for We March as One. It is not affiliated with, endorsed by, or sponsored by dux, Valve, or Steam. All game content, names, artwork, and trademarks belong to their respective owners. The full game was still marked coming soon on the date these pages were checked. This site does not sell the game, redeem codes, or recover accounts. The email in the footer is the support address printed on the Steam store page. This wiki does not read that mailbox.',
   nav: [
     { href: '/', label: 'Home' },
-    { href: '/guide', label: 'Guide' },
+    { href: '/calculator', label: 'Calculator' },
     { href: '/units', label: 'Units' },
-    { href: '/progression', label: 'Progression' },
+    { href: '/progression', label: 'Skill Tree' },
+    { href: '/guide', label: 'Guide' },
     { href: '/tips', label: 'Tips' },
   ],
   moreNav: [
@@ -48,18 +49,19 @@ export const siteConfig = {
   ],
   footerNav: [
     { href: '/', label: 'Home' },
+    { href: '/calculator', label: 'Army Calculator' },
+    { href: '/units', label: 'Units Database' },
+    { href: '/progression', label: 'Skill Tree & Gold' },
     { href: '/guide', label: 'Guide' },
-    { href: '/units', label: 'Units' },
-    { href: '/progression', label: 'Progression' },
     { href: '/tips', label: 'Tips' },
     { href: '/about', label: 'About' },
     { href: '/privacy', label: 'Privacy' },
     { href: '/disclaimer', label: 'Disclaimer' },
   ],
   version: {
-    label: 'Updated Nov 2026',
+    label: 'Unpacked Build #26192930',
     detail:
-      'Verified against official Steam AppID 5189160 and Demo AppID 5403150 store specifications, campaign structure, and unit mechanics.',
+      'Client-verified unit stats, armor counters, 62 skill tree nodes, and 25 campaign waves unpacked from Demo Build #26192930 (26 Nov 2026).',
   },
   databases: [
     {

@@ -1,110 +1,101 @@
 ---
-title: "We March as One Units — Shapes, Roles, and Combat Mechanics"
-description: "We March as One units guide: geometric army shapes, battlefield painting, tactical roles, and skill tree unlocks."
-h1: "We March as One Units & Army Shapes"
+title: "We March as One Units Database — Exact HP, DPS, Armor & Counters (Build #26192930)"
+description: "Complete client-extracted unit database for We March as One (Build #26192930): all 8 playable shapes, exact HP, DPS, attack intervals, armor multipliers, and hard counters."
+h1: "We March as One Units — Unpacked Stats, Armor & Counter Matrix"
 section: "Units"
 order: 2
-verifiedAgainst: "Steam store page (AppID 5189160) and official Steam achievements list, checked 19 Nov 2026."
+verifiedAgainst: "Unpacked from We March as One Demo Build #26192930 (Steam AppID 5403150 · Unity 6000.6.0f1 ShapeWar.UnitTuning & Units_en string tables) on 26 Nov 2026, cross-checked against Steam AppID 5189160."
 quickAnswer:
-  - "Armies in We March as One consist of geometric shapes. The store and achievements confirm starting with shapes and unlocking new unit types via the branching skill tree (Fresh Recruits, Full Roster)."
-  - "The client features seven geometric unit shapes (Circle, Square, Triangle, Hexagon, Pentagon, Diamond, Kite). Specific combat roles, tactical archetypes, and commander upgrades are observed in gameplay but remain unverified on official public store pages."
-  - "Troops are placed by painting directly onto the battlefield. Pre-battle tactical commands (such as MARCH and HOLD) are available in the deployment interface."
-  - "Every soldier and projectile is individually simulated in real time with physics. The game displays no numeric stat cards or character sheets; exact internal combat stats remain unverified."
+  - "Unpacked from Demo Build #26192930: the playable roster contains 8 geometric units—Circle (1g), Square (3g), Triangle (3g), Diamond (5g), Pentagon (300g), Hexagon (300g), Kite (300g), and Chevron (1,000g)."
+  - "Basic units follow a hard counter triangle in code: Square deals 1.5x to Diamond (-65% cavalry dmg taken), Triangle shoots range 16.5 and deals 1.75x to Square, and Diamond runs at speed 5.0 dealing 1.5x to Triangle (-45% arrow dmg taken)."
+  - "Heavy & Elite tier: Hexagon has 1,800 HP with 70% arrow/cavalry damage reduction (weak 1.2x to Bolts); Chevron fires 400-damage piercing bolts at 33 range with a 1.5x bonus vs. Big units."
+  - "Six additional unit enums exist in Assembly-CSharp.dll for full-release content (Heptagon, Crescent, Ring, Needle, Octagon, Nonagon); their campaign balance in the full 50-level build remains unverified."
 sources:
-  - label: "Steam store — We March as One"
+  - label: "Steam Store — We March as One (AppID 5189160)"
     url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
-  - label: "Steam Community — We March as One Achievements"
+  - label: "Steam Demo — We March as One Demo (AppID 5403150, Build #26192930)"
+    url: "https://store.steampowered.com/app/5403150/We_March_as_One_Demo/"
+  - label: "Steam Community — Official Achievements"
     url: "https://steamcommunity.com/stats/5189160/achievements/"
 related:
-  - href: "/guide"
-    label: "Guide"
+  - href: "/calculator"
+    label: "Interactive Army & Wave Calculator"
   - href: "/progression"
-    label: "Progression and the skill tree"
-  - href: "/tips"
-    label: "Tips"
-  - href: "/"
-    label: "Home"
+    label: "62-Node Skill Tree & Gold Economy"
+  - href: "/guide"
+    label: "Overview Guide"
 banner: "/images/official/steam/ss-06.jpg"
-bannerAlt: "Official Steam screenshot from We March as One: a close view of a red mass of round shapes meeting a blue mass, with small white marks along the contact line"
+bannerAlt: "Close-up clash of red and blue geometric formations in We March as One"
 ---
 
 import Callout from '@framework/components/Callout.astro';
 
-In **We March as One**, your army is composed entirely of geometric shapes rather than conventional military classes. According to the official Steam store text and Steam achievements, players start with shapes, paint troops onto the battlefield, and expand their army with new unit types unlocked through a branching skill tree.
+> **Data Provenance (`Unpacked from Demo Build #26192930`)**: Although *We March as One* hides numeric stat sheets inside the in-game UI, every troop entity is driven by `ShapeWar.UnitTuning` ScriptableObjects in `WeMarchAsOneDemo_Data/resources.assets` and `Units_en` localization tables (extracted 26 Nov 2026). Want to test army matchups against any campaign level? **[Open the Interactive Wave & DPS Calculator →](/calculator)**
 
-For how to unlock new unit types and scale army capacity, see [Progression](/progression). For overview gameplay, see the [guide](/guide).
+## All 8 Playable Units — Exact Client Stat Sheet (`ShapeWar.UnitTuning`)
 
-## The Seven Geometric Unit Shapes
-
-The game client features seven distinct geometric units available across game modes. Instead of text stat menus, each shape's combat function is defined by its mass, geometry, and tactical archetype. Because the store description and achievement lists do not enumerate shape names or combat roles, specific unit profiles reflect client observations rather than official published documentation.
+Below are the exact base values extracted from `ShapeWar.UnitTuning` before skill-tree multipliers:
 
 <div class="table-scroll">
 
-| Shape | Observed Role | In-Game Unlock Method | Observed Battlefield Behavior | Verification Status |
-| --- | --- | --- | --- | --- |
-| **Circle** | Baseline Troop / Army Body | Default Starter | Inexpensive core troop; forms bulk front line to absorb initial clashes. In-game upgrade path allows crowning as "The King". | Unverified / ❓ |
-| **Square** | Heavy Infantry / Anchor Wall | Skill Tree Unlock | High physical durability and slower pace. Suited to plug bridges, hold chokepoints, and absorb enemy rushes. | Unverified / ❓ |
-| **Triangle** | Shock Wedge / Concentrated Push | Skill Tree Unlock | Sharp wedge profile. Cuts through concentrated points or enemy flanks; vulnerable if enveloped. | Unverified / ❓ |
-| **Hexagon** | Heavy Support / Formation Depth | Skill Tree Unlock | Multi-sided geometry; adds structural mass behind frontline contact points. | Unverified / ❓ |
-| **Pentagon** | Multi-Angle Skirmish & Defense | Skill Tree Unlock | Balanced tactical profile suited for open terrain, screening uneven terrain, and irregular flanks. | Unverified / ❓ |
-| **Diamond** | Penetration / Frontal Skirmish | Skill Tree Unlock | Pointed angular profile suited for piercing narrow gaps in opposing lines. | Unverified / ❓ |
-| **Kite** | Flanking & Line Spacing | Skill Tree Unlock | Elongated shape deployed on army wings to wrap around enemy flanks or control line spacing. | Unverified / ❓ |
+| Unit Shape | Official Role (`Units_en`) | Gold Value | Base Cap (`UnitsTuning`) | Max HP | Attack Dmg | Attack Interval | Base DPS | Attack Range | Move Speed | Mass / Size | Attached Combat Modules |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| <img src="/images/units/shape-circle.png" alt="" width="20" height="20" style="vertical-align:middle;margin-right:6px;" />**Circle** | Cheap infantry | **1g** | 100 (Start: 5) | **10** | **4.0** | 0.70s | **5.71** | 0.75 | 3.0 | 1.0 / 1.0x | Starter troop; crownable as **The King** |
+| <img src="/images/units/shape-square.png" alt="" width="20" height="20" style="vertical-align:middle;margin-right:6px;" />**Square** | Basic defensive unit | **3g** | 50 | **28** | **6.0** | 0.90s | **6.67** | 1.50 | 3.0 | 1.0 / 1.0x | `bracesCavalry = true` |
+| <img src="/images/units/shape-triangle.png" alt="" width="20" height="20" style="vertical-align:middle;margin-right:6px;" />**Triangle** | Basic ranged unit | **3g** | 50 | **12** | **7.0** | 2.47s | **2.83** | **16.50** | 3.0 | 1.0 / 1.0x | `ProjectileModule` (archer) |
+| <img src="/images/units/shape-diamond.png" alt="" width="20" height="20" style="vertical-align:middle;margin-right:6px;" />**Diamond** | Basic cavalry unit | **5g** | 20 | **40** | **11.0** | 1.15s | **9.57** | 1.40 | **5.0** | 2.0 / 1.4x | `ChargeModule` (light lancer) |
+| <img src="/images/units/shape-pentagon.png" alt="" width="20" height="20" style="vertical-align:middle;margin-right:6px;" />**Pentagon** | Heavy artillery | **300g** | 2 | **200** | **10.0** (AoE) | 6.30s | **1.59** ( Splash ) | **40.00** | 3.0 | 8.0 / 3.0x | `ProjectileModule` · `StructDmg 3.0` |
+| <img src="/images/units/shape-hexagon.png" alt="" width="20" height="20" style="vertical-align:middle;margin-right:6px;" />**Hexagon** | Heavy infantry | **300g** | 4 | **1,800** | **14.0** (AoE) | 1.20s | **11.67** (Sweep) | 4.50 | 3.0 | **60.0 / 6.2x** | `SweepModule` + `SmashModule` + `BulwarkModule` |
+| <img src="/images/units/shape-kite.png" alt="" width="20" height="20" style="vertical-align:middle;margin-right:6px;" />**Kite** | Heavy cavalry | **300g** | 4 | **800** | **30.0** | 0.60s | **50.00** | 3.80 | **5.0** | 20.0 / 3.6x | `SweepModule` + `ChargeModule` · `StructDmg 2.0` |
+| <img src="/images/units/shape-chevron.png" alt="" width="20" height="20" style="vertical-align:middle;margin-right:6px;" />**Chevron** | Elite bolt thrower | **1,000g** | 1 | **2,400** | **400.0** | 2.10s | **190.48** | **33.00** | 3.0 | 12.0 / 5.0x | `ProjectileModule` + `PierceModule` (`1.5x vs Big`) |
 
 </div>
 
-<Callout kind="note" title="Unit Unlocks Confirmed by Steam Achievements">
-Official Steam achievements confirm unlocking unit types: **Fresh Recruits** requires you to *"Unlock a second unit type"*, **Combined Arms** requires winning a battle with *"five or more unit types on the field"*, and **Full Roster** requires you to *"Unlock every unit type"*. The specific count of seven geometric shapes and their individual names are observed in the game client, but are not enumerated in the achievement text or store description.
-</Callout>
+## Armor Multipliers & Hard Counter Matrix
 
-## Painting Units onto the Battlefield
-
-Units are positioned before battle using real-time canvas tools rather than grid snap slots:
-
-- **Brush Tool & Size Control**: The Steam store description states: *"Paint your troops onto the battlefield however you like, and you position them to counter the enemy force."* Players paint formations directly using adjustable brush controls.
-- **Formation Controls**: The preparation UI provides **Undo**, **Clear**, **Upgrades**, **Levels**, and **Fight** buttons.
-- **Pre-Battle Tactical Orders (Unverified / ❓)**:
-  - **MARCH**: Issues an advance directive to move forward, push into gaps, or execute flanking maneuvers.
-  - **HOLD**: Instructs troops to maintain current positioning, brace defensively, and hold bridges or choke points against incoming enemy charges.
-
-## Combined Arms & Deployment Constraints
-
-The campaign encourages mixing shapes to counter distinct enemy force compositions:
-
-- **Single Unit Victory**: The achievement **One of a Kind** ("Win level 10 or later using a single unit type") proves that mono-shape armies can win early-to-mid levels through pure numbers or positioning.
-- **Combined Arms**: The achievement **Combined Arms** ("Win a campaign battle with five or more unit types on the field") confirms that at least five distinct unit types can be deployed together.
-- **The King Commander (Unverified / ❓)**: In-game client skill trees allow crowning a Circle unit as "The King". This commander unit is an in-game feature not mentioned in official store copy or Steam achievements.
-
-![A top-down preparation screen in We March as One, with red blocks along the top, a blue formation below, and Undo, Clear, Levels, and Fight buttons](/images/official/steam/ss-00.jpg)
-
-![A We March as One battlefield screenshot with a river, trees, and blocky buildings between a blue group and a red group](/images/official/steam/ss-02.jpg)
-
-## Individually Simulated Physics vs. Hidden Numbers
-
-The store description emphasizes that *"every soldier and projectile is individually simulated"*. In practice:
-
-- Combat is resolved via physical mass, collision momentum, projectile arcs, and line-of-sight interactions rather than turn-based dice rolls or spreadsheet stat trading.
-- During battle, players can toggle between camera modes (isometric, top-down, or fly-through), alongside simulation speed toggles.
-
-<Callout kind="warn" title="Unverified Stat Blocks">
-The game does not display numeric character sheets (such as numerical Hit Points, DPS values, or armor ratings). Any third-party tier list claiming exact numeric base stats for Circles or Squares is unverified (未核实). Battlefield efficacy depends on paint density, terrain choke points, and command orders.
-</Callout>
-
-## What is Verified vs. Unverified
+In `ShapeWar.UnitStats`, armor values represent **incoming damage multipliers** (`1.0` = 100% full damage taken; `0.30` = **70% damage reduction**; `1.20` = **20% extra vulnerability**):
 
 <div class="table-scroll">
 
-| Detail | Status | Source / Fact Basis |
-| --- | --- | --- |
-| Roster expansion via skill tree | **Verified** | Official Steam achievements *Fresh Recruits* ("Unlock a second unit type"), *Combined Arms* ("five or more unit types"), and *Full Roster* ("Unlock every unit type"). |
-| Placement via painting brush | **Verified** | Official Steam store page ("Paint your troops onto the battlefield however you like"). |
-| Army scaling to tens of thousands | **Verified** | Official Steam store page ("build an army tens of thousands strong") and achievement *Full Muster*. |
-| Individually simulated physics | **Verified** | Official Steam store page ("every soldier and projectile is individually simulated"). |
-| Exact roster of 7 unit shapes | **Unverified / ❓** | Observed in game client; shape names (Circle, Square, Triangle, Hexagon, Pentagon, Diamond, Kite) are not listed in store text or achievements. |
-| Starting unit shape (Circle) | **Unverified / ❓** | Observed in game client; store copy notes starting with "a few shapes" without specifying Circle. |
-| MARCH and HOLD commands | **Unverified / ❓** | In-game deployment interface controls; not mentioned in store text or achievements. |
-| The King commander upgrade | **Unverified / ❓** | Observed in client skill tree; not documented in store text or achievements. |
-| Numeric HP / Attack stat sheets | **Unverified / ❓** | Combat is physics-simulated; no RPG stat cards or numeric character sheets exist in official documentation. |
-| Per-stroke soldier count formulas | **Unverified / ❓** | Placement density scales with brush radius and boundary size without a printed number formula. |
-| Fixed unit tier rankings | **Unverified / ❓** | Units fill contextual roles; effectiveness varies by enemy layout and terrain. |
+| Unit Shape | Bonus Damage Multiplier (`vsType` / `vsBig`) | Normal Melee Taken | Projectile (Arrow) Taken | Explosive (Shell) Taken | Bolt (Chevron) Taken | Cavalry Charge Taken |
+| --- | --- | --- | --- | --- | --- | --- |
+| **Circle** | — | 1.00x | 1.00x | 1.00x | 1.00x | 1.00x |
+| **Square** | **1.50x vs Diamond** (`+50%`) | 1.00x | **0.70x** (`-30%`) | 1.00x | 1.00x | **0.35x** (`-65%`, Braces) |
+| **Triangle** | **1.75x vs Square** (`+75%`) | 1.00x | 1.00x | 1.00x | 1.00x | 1.00x |
+| **Diamond** | **1.50x vs Triangle** (`+50%`) | 1.00x | **0.55x** (`-45%`) | 1.00x | 1.00x | 1.00x |
+| **Pentagon** | `StructureDamage = 3.0` (Wall breaker) | 1.00x | 1.00x | 1.00x | 1.00x | 1.00x |
+| **Hexagon** | AoE Slam + `bracesCavalry = true` | **0.80x** (`-20%`) | **0.30x** (`-70%`) | **0.50x** (`-50%`) | **1.20x** (`+20%` weak!) | **0.30x** (`-70%`) |
+| **Kite** | `StructureDamage = 2.0` + Charge Sweep | 1.00x | **0.50x** (`-50%`) | 1.00x | **0.42x** (`-58%`) | 1.00x |
+| **Chevron** | **1.50x vs Big Units** (`vsBigDamage = 1.5`) | 1.00x | 1.00x | 1.00x | 1.00x | 1.00x |
+
+</div>
+
+<Callout kind="note" title="Why Chevrons Delete Enemy Hexagons (1.80x Effective Multiplier)">
+Enemy **Hexagons** shrug off 70% of arrow and cavalry damage (`0.30x`), making basic swarms stall against them from Level 16 onward. However, Hexagons have `armorBolt = 1.20` (+20% bolt vulnerability) while **Chevrons** carry `vsBigDamage = 1.50`—combining for **720 effective damage per bolt** before piercing!
+</Callout>
+
+## Command Mode Controls & Crown Mechanics (Verified in `Battle_en` & `Help_en`)
+
+- **Crowning The King (`160g` Skill Node)**: Once unlocked on the Circle branch, **double-click (`LMB ×2`) any Circle** during pre-battle placement to crown it as your King (**10x HP = 100 HP, 10x Damage = 40 Dmg**, and **+30% move & attack speed** to nearby allies; upgradable with *Command Voice* for 2x aura radius and *King's Armor* for 90% damage reduction).
+- **Real-Time Tactical Orders (`RtsOrderKind`)**:
+  - **Attack Move (`RMB`)**: March to target point, engage enemies along the path, or focus-fire a clicked enemy.
+  - **Move (`E`)**: Reposition or retreat to the cursor without stopping to fight.
+  - **Hold (`R`)**: Stop in place and brace against incoming charges while attacking enemies in reach.
+  - **Release Orders (`T`) / Select Army (`Q`)**: Clear manual orders or select your entire fielded force.
+
+## Extended Full-Game Unit Enums Found in Code (`Unverified` in Demo Campaign)
+
+Inside `ShapeWar.UnitType` (`Assembly-CSharp.dll`) and `Units_en` string tables, six additional unit classes are defined beyond the 8 Demo-unlocked shapes (`DemoConfig.units = [0, 1, 2, 3, 4, 7, 8, 6]`). Because their `UnitTuning` assets are not bundled into the Demo's `resources.assets`, only their enum IDs, base capacities, and official blurbs are verified—exact HP/DPS in the 50-level retail build remain **Unverified**:
+
+<div class="table-scroll">
+
+| Enum ID | Shape Name | Official `Units_en` Role Blurb | Base Cap (`UnitsTuning`) | Status in Demo Build `#26192930` |
+| --- | --- | --- | --- | --- |
+| `5` | **Heptagon** | *"Heavy artillery"* | 2 | Enum & string verified; tuning **Unverified** (Full game) |
+| `9` | **Crescent** | *"Melee unit that sweeps a wide arc"* | 3 | Enum & string verified; tuning **Unverified** (Full game) |
+| `10` | **Ring** | *"Support unit that boosts nearby allies"* | 2 | Enum & string verified; tuning **Unverified** (Full game) |
+| `11` | **Needle** | *"Long-range sniper"* | 10 | Enum & string verified; tuning **Unverified** (Full game) |
+| `12` | **Octagon** | *"Walking fortress"* | 1 | Enum & string verified; tuning **Unverified** (Full game) |
+| `13` | **Nonagon** | *"Long-range missile launcher"* | 1 | Enum & string verified; tuning **Unverified** (Full game) |
 
 </div>

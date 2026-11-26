@@ -39,6 +39,10 @@ const art = {
 };
 
 const guideArt: Record<string, { src: string; alt: string }> = {
+  calculator: {
+    src: art.field,
+    alt: 'Deployment screen and army calculator preview for We March as One',
+  },
   guide: {
     src: art.contact,
     alt: 'Dense red and blue formations meeting in a We March as One store screenshot',
@@ -59,36 +63,36 @@ const guideArt: Record<string, { src: string; alt: string }> = {
 
 const doors = [
   {
-    href: '/guide',
+    href: '/calculator',
     num: '01',
-    title: 'Guide',
-    text: 'What We March as One is, the Nov 13, 2026 date, the free demo, and the fact table from Steam.',
-    image: art.capsule,
-    alt: 'Official Steam capsule for We March as One, blue cubes facing red cubes under the full title',
+    title: 'Wave & DPS Calculator',
+    text: 'Client-extracted Build #26192930 planner: simulate all 8 shape units, armor counters, and Gold payouts across Campaign Levels 1–25.',
+    image: art.field,
+    alt: 'Top-down deployment field in We March as One',
   },
   {
     href: '/units',
     num: '02',
-    title: 'Units',
-    text: 'Verified geometric army shapes, battlefield painting, tactical roles, and simulation mechanics.',
+    title: 'Units Database',
+    text: 'Exact unpacked HP, DPS, attack intervals, armor reduction multipliers, and hard counters for all 8 playable shapes.',
     image: art.close,
     alt: 'Close Steam screenshot of a red mass of shapes meeting a blue mass in We March as One',
   },
   {
     href: '/progression',
     num: '03',
-    title: 'Progression',
-    text: 'The 50-level campaign, gold persistence, the branching skill tree, and sandbox unlocks.',
+    title: '62-Node Skill Tree',
+    text: 'All unpacked upgrade Gold costs, 0.4x defeat kill bounty math, The King crown multipliers, and 50-level milestones.',
     image: art.tree,
     alt: 'Steam screenshot of a skill-tree graph and a recruit panel in We March as One',
   },
   {
-    href: '/tips',
+    href: '/guide',
     num: '04',
-    title: 'Tips',
-    text: 'Readings of the store text only. Placement, a loss that still pays, and the three camera modes.',
-    image: art.field,
-    alt: 'Steam screenshot of a top-down We March as One field before the fight, with Undo, Clear, and Fight',
+    title: 'Overview Guide',
+    text: 'Game modes (Campaign, Tactics, Command, Sandbox), release details, and PC specs.',
+    image: art.capsule,
+    alt: 'Official Steam capsule for We March as One, blue cubes facing red cubes under the full title',
   },
 ];
 
@@ -148,9 +152,9 @@ const stills = [
             Paint tens of thousands of individually simulated troops onto the battlefield, farm persistent Gold even on defeated runs, and unlock specialized geometric formations across a 50-level campaign.
           </p>
           <div class="cta-row">
-            <a class="btn" href="/units">Unit Formations</a>
-            <a class="btn ghost" href="/progression">Skill Tree &amp; Gold</a>
-            <a class="btn ghost" href="/tips">Tactical Tips</a>
+            <a class="btn" href="/calculator">Army &amp; Wave Calculator</a>
+            <a class="btn ghost" href="/units">8 Units Stats</a>
+            <a class="btn ghost" href="/progression">62 Skill Nodes</a>
             <a class="btn ghost" href={siteConfig.steamUrl}>Steam Store</a>
           </div>
           <p class="version-note">{siteConfig.version.detail}</p>

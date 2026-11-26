@@ -1,121 +1,141 @@
 ---
-title: "We March as One Progression — Gold Economy, Skill Tree Branches, and Campaign Structure"
-description: "We March as One progression guide: 50-level campaign milestones, gold persistence on win or loss, permanent skill tree upgrades, army capacity, and sandbox unlocks."
-h1: "We March as One Progression & Skill Tree Guide"
+title: "We March as One Skill Tree & Gold Economy — All Node Costs & Multipliers"
+description: "Unpacked We March as One skill tree costs, prerequisite paths, Gold kill bounty formulas (0.4x defeat floor), and 50-level campaign milestones from Build #26192930."
+h1: "We March as One Skill Tree Costs & Gold Progression Math"
 section: "Progression"
 order: 3
-verifiedAgainst: "Steam store page (AppID 5189160) and official Steam achievements list, checked 19 Nov 2026."
+verifiedAgainst: "Unpacked from We March as One Demo Build #26192930 (DemoSkillTree, EconomyTuning & Tree_en) on 26 Nov 2026, plus Steam AppID 5189160 store and achievement records."
 quickAnswer:
-  - "Progression is built on a persistent loop: gold is earned from defeated enemies whether you win or lose each battle, and fallen troops return for subsequent encounters."
-  - "The main campaign spans 50 levels, featuring City levels at levels 10, 20, 30, 40, and 50 as confirmed by the Sacked achievement. Performance ratings include DECISIVE and HEROIC badges."
-  - "Gold is spent on a branching skill tree that unlocks new unit types and upgrades army capacity, as confirmed by Steam achievements (Fresh Recruits, Full Muster, Every Last Leaf)."
-  - "Specific node paths, permanent respec locks, and Sandbox unlock conditions reflect in-game client systems and remain unverified on official public store pages."
+  - "Unpacked from EconomyTuning: defeated enemies on uncleared stages pay 40% of their Gold unit value (unclearedKillGold = 0.40) whether you win or lose."
+  - "DECISIVE (+50%) and MASTERED (+50%) ratings each add half the base stage reward on top of first-clear Gold; replaying cleared levels pays 20% kill value."
+  - "All three core counter shapes—Squares, Triangles, and Diamonds—cost just 5 Gold each to unlock right off the root Circles node, while Heavy shapes (Pentagon, Hexagon, Kite) cost 350 Gold and Elite Chevron costs 3,000 Gold."
+  - "The full Steam release spans 50 campaign levels (City sieges at 10, 20, 30, 40, 50), while Demo Build #26192930 includes 25 campaign stages and 62 skill tree nodes."
 sources:
-  - label: "Steam store — We March as One"
+  - label: "Steam Store — We March as One (AppID 5189160)"
     url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
-  - label: "Steam Community — We March as One Achievements"
+  - label: "Steam Demo — We March as One Demo (AppID 5403150, Build #26192930)"
+    url: "https://store.steampowered.com/app/5403150/We_March_as_One_Demo/"
+  - label: "Steam Community — Official Achievements"
     url: "https://steamcommunity.com/stats/5189160/achievements/"
 related:
-  - href: "/guide"
-    label: "Guide"
+  - href: "/calculator"
+    label: "Interactive Army & Wave Calculator"
   - href: "/units"
-    label: "Units"
-  - href: "/tips"
-    label: "Tips"
-  - href: "/"
-    label: "Home"
+    label: "All 8 Units & Exact Client Stats"
+  - href: "/guide"
+    label: "Overview Guide"
 banner: "/images/official/steam/ss-08.jpg"
-bannerAlt: "Official Steam screenshot from We March as One: a dark branching node graph beside a recruit panel, with a Back to Levels button"
+bannerAlt: "Branching skill tree graph and recruit panel in We March as One"
 ---
 
 import Callout from '@framework/components/Callout.astro';
 
-Progression in **We March as One** ties battle outcomes directly to army growth. The core loop is verified by official Steam store text and Steam achievements: players push through a 50-level campaign (*We March as One* achievement), earn gold on win or loss (*Lessons Learned*), reinvest into a branching skill tree (*Every Last Leaf*), and expand army capacity (*Full Muster*).
+Progression in **We March as One** combines persistent troop ownership with a deterministic Gold bounty formula. Below are the exact economy multipliers and skill-tree node prices unpacked from **Build `#26192930`** (`EconomyTuning` + `DemoSkillTree`). To simulate how these upgrades change your wave clear odds, open the **[Army & Wave Calculator](/calculator)**.
 
-For individual troop shapes and placement rules, see [Units](/units). For overall game systems, see the [guide](/guide).
+## Exact Gold Economy Formulas (`ShapeWar.EconomyTuning`)
 
-## The Core Loop: Gold, Army Persistence, and Defeat
+<div class="table-scroll">
 
-The campaign economy is defined by persistent progression rules:
+| Economy Parameter | Unpacked Value | How It Works in Campaign |
+| --- | --- | --- |
+| `startingGold` | **0g** | You begin Level 1 with **5 free Circles** (`rosterCircles = 5`) against 5 enemy Circles (`reward = 30g`). |
+| `unclearedKillGold` | **0.40 (40%)** | On any uncleared stage, every enemy killed pays **40% of its `goldValue`** even if your army is wiped out. |
+| `killGold` / `repeatReward` | **0.20 / 0.10** | Replaying an already-cleared stage pays reduced kill bounties after all stars are claimed. |
+| `markHeld` (**DECISIVE**) | **+0.50 (+50%)** | Bonus Gold multiplier for earning the DECISIVE rating. |
+| `markMastered` (**MASTERED**) | **+0.50 (+50%)** | Additional Gold multiplier for earning full 3-star mastery on a stage. |
 
-1. **Gold on Win or Lose**: Defeated enemy shapes yield gold regardless of battle outcome. The store page states you earn gold whether you win or lose, and the achievement **Lessons Learned** ("Lose a battle") acknowledges defeat as part of normal progression.
-2. **Persistent Army Size**: Fallen friendly troops return for the next battle. As described on Steam: *"Fallen troops return for the next battle, so you keep the army you have built."*
-3. **No Respecs (Unverified / ❓)**: In-game client purchases on the campaign skill tree are permanent without an in-game respec button; this restriction is not published in store documentation.
+</div>
 
-<Callout kind="note" title="A Loss is Still Economic Progress">
-Because gold is credited from enemies defeated during the engagement, repeated attempts against difficult hordes steadily accumulate gold to purchase army capacity or new troop types.
+## Unpacked Skill Tree — Unit Unlocks, Economy & Keystone Nodes (`DemoSkillTree`)
+
+`DemoSkillTree` contains **62 nodes** across five major branches off the free `circles` root:
+
+### 1. Economy & Army-Wide Branch
+<div class="table-scroll">
+
+| Node ID | Official Title | Gold Cost | Prerequisite | Exact Effect (`Tree_en` & `amount`) |
+| --- | --- | --- | --- | --- |
+| `e_chest` | **WAR CHEST** | **150g** | `circles` | Battles pay **+10% more Gold** (`1.10x`) |
+| `e_mastery` | **MASTERY** | **260g** | `e_chest` | Mastering a level (3 stars) pays **+20% more Gold** (`1.20x`) |
+| `e_bounties` | **BOUNTIES** | **700g** | `e_mastery` | Every enemy Heavy or Elite unit killed pays **+10 Gold**, win or lose |
+| `a_arms` | **COMBINED ARMS** | **900g** | `e_chest` | Entire army attacks **+5% faster per distinct unit type** fielded |
+| `a_reserves` | **RESERVES** | **450g** | `a_arms` | Hold back up to **25% of your army** and paint them in during the first 15s of battle |
+
+</div>
+
+### 2. Circle & The King Commander Branch
+<div class="table-scroll">
+
+| Node ID | Official Title | Gold Cost | Prerequisite | Exact Effect |
+| --- | --- | --- | --- | --- |
+| `ccap1` / `2` / `3` | **CIRCLE CAPACITY I–III** | **40g / 250g / 1,050g** | Sequential | Adds **+300 / +600 / +1,100** Circle capacity (on top of 100 base = **2,100 total**) |
+| `c_general` | **THE KING** | **160g** | `ccap1` | Double-click one Circle to crown: **10x HP & damage**, nearby allies **+30% move & attack speed** |
+| `c_voice` | **COMMAND VOICE** | **200g** | `c_general` | King's rally aura radius **2.0x** |
+| `c_kingsarmor` | **KING'S ARMOR** | **450g** | `c_general` | King takes **90% less damage** (`0.10x`) |
+| `c_blades` / `2` | **QUICK BLADES I & II** | **40g / 700g** | `ccap1` → `c_blades` | Circles attack **+10%**, then an additional **+50% faster** |
+| `c_latch` | **LATCH ON** | **250g** | `ccap2` | Circle hits slow Heavy and Elite enemies (`25%`) |
+| `c_mitosis` | **MITOSIS** | **300g** | `ccap2` | Fallen Circles have a **15% chance** to split into two half-health Circles |
+| `c_kegs` | **POWDER KEGS** | **350g** | `c_mitosis` | Fallen Circles have a **6% chance** to explode |
+
+</div>
+
+### 3. Square & Hexagon (Infantry / Tank) Branch
+<div class="table-scroll">
+
+| Node ID | Official Title | Gold Cost | Prerequisite | Exact Effect |
+| --- | --- | --- | --- | --- |
+| `squares` | **SQUARES** | **5g** | `circles` | Unlocks **Square** (`3g` anti-cavalry defensive infantry) |
+| `scap1` / `2` / `3` | **SQUARE CAPACITY I–III** | **40g / 240g / 1,150g** | Sequential | Adds **+100 / +200 / +350** Square capacity (50 base → **700 total**) |
+| `s_pikes` | **LONG PIKES** | **40g** | `squares` | Squares reach **+25% further** (`1.25x`) |
+| `s_wall` | **SHIELD WALL** | **200g** | `scap1` | Squares take **4% less damage per adjacent Square**, up to **32%** |
+| `s_thorns` | **THORNS** | **400g** | `s_wall` | Squares reflect **50% of melee damage** taken back to the attacker |
+| `s_pavise` / `2` | **PAVISE PLATE I & II** | **450g / 900g** | `scap1` → `s_pavise` | Blocks the **first 1 / first 2** incoming arrows or lances |
+| `s_mail` | **CHAINMAIL** | **450g** | `scap2` | Squares gain **+25% max HP** (`28 → 35 HP`) |
+| `hexagons` | **HEXAGONS** | **350g** | `scap2` | Unlocks **Hexagon** (`300g`, `1,800 HP` heavy infantry) |
+| `hcap1` / `2` | **HEXAGON CAPACITY I–II** | **700g / 1,500g** | `hexagons` → `hcap1` | Adds **+6 / +10** Hexagon capacity (4 base → **20 total**) |
+| `h_plate` | **IRON PLATE** | **700g** | `hcap1` | Hexagons gain **+30% max HP** (`1,800 → 2,340 HP`) |
+| `h_wide` | **WIDE SLAM** | **1,100g** | `hexagons` | Hexagon AoE slam radius **+25%** |
+| `h_bastion` | **BASTION** | **1,300g** | `h_plate` | Friendly troops near a Hexagon take **25% less damage** |
+
+</div>
+
+### 4. Triangle, Pentagon & Chevron (Ranged / Artillery / Bolt) Branch
+<div class="table-scroll">
+
+| Node ID | Official Title | Gold Cost | Prerequisite | Exact Effect |
+| --- | --- | --- | --- | --- |
+| `triangles` | **TRIANGLES** | **5g** | `circles` | Unlocks **Triangle** (`3g` ranged archer, `1.75x vs Square`) |
+| `tcap1` / `2` / `3` | **TRIANGLE CAPACITY I–III** | **45g / 280g / 2,000g** | Sequential | Adds **+100 / +200 / +350** Triangle capacity (50 base → **700 total**) |
+| `t_rapid` / `2` | **RAPID FIRE I & II** | **40g / 1,000g** | `triangles` → `t_rapid` | Triangles shoot **+10%**, then an additional **+15% faster** |
+| `t_barbed` | **BARBED ARROWS** | **250g** | `tcap1` | Arrows slow target move & attack speed by **25% for 2s** |
+| `t_longbows` | **LONGBOWS** | **450g** | `tcap1` | Triangles shoot **+15% further** (`16.5 → 18.98` range) |
+| `t_pierce` | **PIERCING ARROWS** | **600g** | `t_longbows` | Arrows pass through the first target and hit the next at **10% damage** |
+| `t_fire` | **FIRE ARROWS** | **900g** | `t_barbed` | Arrow hits ignite targets for burn damage over time |
+| `pentagons` | **PENTAGONS** | **350g** | `tcap2` | Unlocks **Pentagon** (`300g`, `40.0` range artillery) |
+| `pcap1` / `2` | **PENTAGON CAPACITY I–II** | **700g / 1,500g** | `pentagons` → `pcap1` | Adds **+3 / +5** Pentagon capacity (2 base → **10 total**) |
+| `p_longguns` | **LONG GUNS** | **1,300g** | `pentagons` | Pentagons fire **+20% further** (`40.0 → 48.0` range) |
+| `p_splash` | **BIG SPLASH** | **1,400g** | `pcap1` | Pentagon shell splash area **+15%** |
+| `chevrons` | **CHEVRON** | **3,000g** | `pcap2` | Unlocks **Chevron** (`1,000g` elite bolt thrower, `400 Dmg`, `1.5x vs Big`) |
+
+</div>
+
+### 5. Diamond & Kite (Light & Heavy Cavalry) Branch
+<div class="table-scroll">
+
+| Node ID | Official Title | Gold Cost | Prerequisite | Exact Effect |
+| --- | --- | --- | --- | --- |
+| `diamonds` | **DIAMONDS** | **5g** | `circles` | Unlocks **Diamond** (`5g` fast cavalry, `1.5x vs Triangle`) |
+| `dcap1` / `2` / `3` | **DIAMOND CAPACITY I–III** | **50g / 280g / 1,150g** | Sequential | Adds **+50 / +150 / +200** Diamond capacity (20 base → **420 total**) |
+| `d_sabres` / `2` | **SHARP SABRES I & II** | **40g / 800g** | `diamonds` → `d_sabres` | Diamonds attack **+10%**, then an additional **+50% faster** |
+| `d_blooded` | **BLOODED** | **400g** | `dcap1` | After a charge lands, Diamonds attack **2x as fast for 4s** |
+| `d_lance` | **LANCE** | **650g** | `d_blooded` | First charge strike reaches further and deals bonus impact damage |
+| `kites` | **KITES** | **350g** | `dcap2` | Unlocks **Kite** (`300g`, `800 HP`, `50 DPS` heavy cavalry) |
+| `kcap1` / `2` | **KITE CAPACITY I–II** | **700g / 1,500g** | `kites` → `kcap1` | Adds **+6 / +10** Kite capacity (4 base → **20 total**) |
+| `k_mounts` | **FRESH MOUNTS** | **900g** | `kites` | Kites attack **+70% faster** (`50 → 85 DPS`) |
+| `k_dread` | **DREAD** | **1,600g** | `kcap2` | Enemies near a Kite attack **40% slower** |
+
+</div>
+
+<Callout kind="note" title="Full 50-Level Retail Tree vs. Demo Build #26192930">
+Steam achievements confirm the full retail game spans **50 campaign levels** (*We March as One*, with City levels at 10, 20, 30, 40, and 50). Nodes beyond the 62 unpacked `DemoSkillTree` entries (covering the 6 late-game shapes) remain **Unverified** until extracted from the retail build.
 </Callout>
-
-## The Branching Skill Tree Architecture
-
-Accessible via the **Upgrades** button on the preparation screen, the skill tree is structured as an interconnected node graph. Upgrades divide into primary tracks:
-
-<div class="table-scroll">
-
-| Upgrade Track | In-Game Function | Strategic Role | Verification Status & Milestone |
-| --- | --- | --- | --- |
-| **Unit Type Unlocks** | Unlocks additional unit types beyond starter shapes | Expands tactical army composition | **Verified** (*Fresh Recruits*: "Unlock a second unit type", *Full Roster*: "Unlock every unit type") |
-| **Army Capacity** | Increases maximum soldier count placed onto the battlefield | Scales army size toward tens of thousands | **Verified** (Store text: "army tens of thousands strong"; Achievement *Full Muster*: "Unlock every unit and buy every army capacity upgrade") |
-| **The King Branch** | Crowns a Circle unit into a commander | Provides commander aura to adjacent units | **Unverified / ❓** (Observed in-game node graph; not documented in store text or achievements) |
-| **Shape Specializations** | Upgrades specific shape attributes | Specializes army around chosen unit compositions | **Unverified / ❓** (Observed in-game node graph; specific passive stat modifiers not published) |
-| **Tree Mastery** | Overall progression across the skill tree | Tracks total upgrades unlocked across the campaign | **Verified** (*Studied*: "Own half of the skill tree", *Every Last Leaf*: "Own every single upgrade in the skill tree") |
-
-</div>
-
-![A We March as One preparation screenshot with an Upgrades button next to Undo, Clear, Levels, and Fight](/images/official/steam/ss-04.jpg)
-
-## 50-Level Campaign & City Fortress Milestones
-
-The campaign features 50 sequential levels. Every ten levels culminates in a **City** encounter verified by the *Sacked* achievement:
-
-<div class="table-scroll">
-
-| Level Range | Key Encounter / Milestone | Verified Achievement |
-| --- | --- | --- |
-| **Levels 1–5** | Introductory campaign battles | *The March Begins* ("Win your first battle"), *First Steps* ("Win level 5") |
-| **Levels 6–10** | Level 10 City milestone | *Key to the City* ("Win level 10"), *Sacked* (Decisive on level 10), *Man-at-Arms* (Decisive & Heroic on levels 1–10) |
-| **Levels 11–20** | Level 20 City milestone | *No Turning Back* ("Win level 20"), *Sacked* (Decisive on level 20), *Knight* (Decisive & Heroic on levels 11–20) |
-| **Levels 21–30** | Level 30 City milestone | *Over the Hill* ("Win level 30"), *Sacked* (Decisive on level 30), *Captain* (Decisive & Heroic on levels 21–30) |
-| **Levels 31–40** | Level 40 City milestone | *The Long March* ("Win level 40"), *Sacked* (Decisive on level 40), *Marshal* (Decisive & Heroic on levels 31–40) |
-| **Levels 41–50** | Level 50 City milestone & Campaign Victory | *We March as One* ("Win level 50"), *Sacked* (Decisive on level 50), *Grand Marshal* (Decisive & Heroic on levels 41–50), *Conqueror* (Decisive & Heroic on all 50) |
-
-</div>
-
-### Victory Badges: Decisive and Heroic
-
-Levels can be cleared with performance ratings:
-- **DECISIVE**: Awarded for swift victories (*Decisive* achievement: "Earn a DECISIVE rating on any level").
-- **HEROIC**: Awarded for high-efficiency survival (*Heroic* achievement: "Earn a HEROIC rating on any level").
-- **Mastered**: Awarded for holding both ratings on the same stage (*Mastered* achievement: "Hold both DECISIVE and HEROIC ratings on the same level").
-- **Campaign Mastery Tiers**: Sequential achievements track holding both DECISIVE and HEROIC ratings across 10-level campaign tiers: *Man-at-Arms* (levels 1–10), *Knight* (levels 11–20), *Captain* (levels 21–30), *Marshal* (levels 31–40), *Grand Marshal* (levels 41–50), culminating in *Conqueror* (all 50 levels).
-
-## Game Modes & Sandbox Progression
-
-Outside the linear 50-level Campaign, the game features distinct modes confirmed by Steam achievements and store descriptions:
-
-- **Tactics Mode**: Tactical puzzle battles confirmed by the achievement **Tactician** ("Solve a Tactics board puzzle").
-- **Command Mode**: Direct battle engagements confirmed by the achievement **Hands On** ("Win a Command battle").
-- **Muster Mode (Unverified / ❓)**: Draft-style budget battles. Mentioned in community gameplay, but unreferenced in Steam store text or official achievement descriptions.
-- **Sandbox Mode & Level Editor**: Confirmed by the Steam store description and the achievement **Blank Canvas** ("Start a battle in the Sandbox").
-  - *Unlock Rules (Unverified / ❓)*: The mechanism where Sandbox elements unlock as they are encountered across game modes is observed in-game client behavior and is not documented in public store copy.
-
-## What is Verified vs. Unverified
-
-<div class="table-scroll">
-
-| Detail | Status | Fact Basis |
-| --- | --- | --- |
-| 50 Campaign Levels | **Verified** | Official Steam achievements (*Key to the City*, *We March as One*). |
-| City Levels at 10, 20, 30, 40, 50 | **Verified** | Official Steam achievement *Sacked* ("Earn DECISIVE on a city level (Level 10, 20, 30, 40, or 50)"). |
-| Gold rewarded on win and loss | **Verified** | Official Steam store description and achievement *Lessons Learned*. |
-| Fallen troops persist across battles | **Verified** | Official Steam store description ("Fallen troops return for the next battle, so you keep the army you have built"). |
-| Decisive and Heroic ratings | **Verified** | Official Steam achievements (*Decisive*, *Heroic*, *Mastered*, *Conqueror*). |
-| Tactics, Command, and Sandbox modes | **Verified** | Official Steam store page and achievements (*Tactician*, *Hands On*, *Blank Canvas*). |
-| No skill-tree respecs in campaign | **Unverified / ❓** | Observed in-game client purchasing behavior; no official store documentation confirms permanent respec locking. |
-| Sandbox unlock via mode encounters | **Unverified / ❓** | Observed in-game client unlock trigger; store text notes level editor existence but not unlock mechanics. |
-| Muster game mode | **Unverified / ❓** | Present in game client; not referenced in official Steam store text or achievements. |
-| Exact gold cost scaling per node tier | **Unverified / ❓** | In-game skill tree costs scale across tiers, but exact per-node values are not published in official documentation. |
-| Exact gold drop bounty per enemy shape | **Unverified / ❓** | Enemies yield gold on defeat, but exact per-shape coin values are not printed in official docs. |
-| Exact percentage buffs on passive nodes | **Unverified / ❓** | In-game skill tree does not publish raw percentage stat cards. |
-
-</div>

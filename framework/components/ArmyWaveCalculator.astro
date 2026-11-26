@@ -1,0 +1,545 @@
+---
+/**
+ * We March as One — Interactive Army Cost, Counter-DPS & Wave Survival Calculator
+ * 100% client-extracted numbers from Steam Demo Build #26192930 (Unity 6000.6.0f1 · resources.assets & Assembly-CSharp.dll).
+ */
+---
+<section class="wmao-calc" aria-label="We March as One Army & Wave Calculator">
+  <div class="wmao-calc-head">
+    <div class="wmao-badge-row">
+      <span class="wmao-tag">Client Extracted · Build #26192930</span>
+      <span class="wmao-subtag">8 Units · 25 Campaign Waves · Counter Math</span>
+    </div>
+    <h2>Army Composition, Counter-DPS &amp; Wave Survival Calculator</h2>
+    <p>
+      Select any campaign wave (Levels 1–25 unpacked from <code>DemoLevel1..25</code>) and enter your shape counts to compute exact Gold value, total HP, matchup-adjusted DPS, clear verdict, and guaranteed defeat/victory Gold payout.
+    </p>
+  </div>
+
+  <div class="wmao-wave-bar">
+    <label class="wmao-wave-select">
+      <span>Target Campaign Wave (Enemy Roster from Client)</span>
+      <select id="wmao-level-select"></select>
+    </label>
+    <div class="wmao-enemy-summary" id="wmao-enemy-summary"></div>
+  </div>
+
+  <div class="wmao-unit-grid" id="wmao-unit-inputs">
+    <div class="wmao-unit-card" data-unit="0">
+      <div class="u-top">
+        <img src="/images/units/shape-circle.png" alt="Circle" width="28" height="28" />
+        <div>
+          <strong>Circle</strong>
+          <small>1g · 10 HP · 5.71 DPS</small>
+        </div>
+      </div>
+      <input type="number" min="0" max="20000" step="10" value="120" data-uinput="0" aria-label="Circle count" />
+    </div>
+
+    <div class="wmao-unit-card" data-unit="1">
+      <div class="u-top">
+        <img src="/images/units/shape-square.png" alt="Square" width="28" height="28" />
+        <div>
+          <strong>Square</strong>
+          <small>3g · 28 HP · 1.5x vs Diamond</small>
+        </div>
+      </div>
+      <input type="number" min="0" max="10000" step="5" value="40" data-uinput="1" aria-label="Square count" />
+    </div>
+
+    <div class="wmao-unit-card" data-unit="2">
+      <div class="u-top">
+        <img src="/images/units/shape-triangle.png" alt="Triangle" width="28" height="28" />
+        <div>
+          <strong>Triangle</strong>
+          <small>3g · Rng 16.5 · 1.75x vs Square</small>
+        </div>
+      </div>
+      <input type="number" min="0" max="10000" step="5" value="40" data-uinput="2" aria-label="Triangle count" />
+    </div>
+
+    <div class="wmao-unit-card" data-unit="3">
+      <div class="u-top">
+        <img src="/images/units/shape-diamond.png" alt="Diamond" width="28" height="28" />
+        <div>
+          <strong>Diamond</strong>
+          <small>5g · Spd 5 · 1.5x vs Triangle</small>
+        </div>
+      </div>
+      <input type="number" min="0" max="5000" step="5" value="20" data-uinput="3" aria-label="Diamond count" />
+    </div>
+
+    <div class="wmao-unit-card" data-unit="4">
+      <div class="u-top">
+        <img src="/images/units/shape-pentagon.png" alt="Pentagon" width="28" height="28" />
+        <div>
+          <strong>Pentagon</strong>
+          <small>300g · Rng 40 · Artillery</small>
+        </div>
+      </div>
+      <input type="number" min="0" max="200" step="1" value="0" data-uinput="4" aria-label="Pentagon count" />
+    </div>
+
+    <div class="wmao-unit-card" data-unit="6">
+      <div class="u-top">
+        <img src="/images/units/shape-hexagon.png" alt="Hexagon" width="28" height="28" />
+        <div>
+          <strong>Hexagon</strong>
+          <small>300g · 1,800 HP · Heavy Tank</small>
+        </div>
+      </div>
+      <input type="number" min="0" max="200" step="1" value="0" data-uinput="6" aria-label="Hexagon count" />
+    </div>
+
+    <div class="wmao-unit-card" data-unit="7">
+      <div class="u-top">
+        <img src="/images/units/shape-kite.png" alt="Kite" width="28" height="28" />
+        <div>
+          <strong>Kite</strong>
+          <small>300g · 800 HP · 50 DPS Cav</small>
+        </div>
+      </div>
+      <input type="number" min="0" max="200" step="1" value="0" data-uinput="7" aria-label="Kite count" />
+    </div>
+
+    <div class="wmao-unit-card" data-unit="8">
+      <div class="u-top">
+        <img src="/images/units/shape-chevron.png" alt="Chevron" width="28" height="28" />
+        <div>
+          <strong>Chevron</strong>
+          <small>1,000g · 400 Dmg · 1.5x vs Big</small>
+        </div>
+      </div>
+      <input type="number" min="0" max="100" step="1" value="0" data-uinput="8" aria-label="Chevron count" />
+    </div>
+  </div>
+
+  <div class="wmao-perks">
+    <span class="perk-label">Skill Tree Modifiers:</span>
+    <label><input type="checkbox" id="pk-king" checked /> <span>The King (160g: 1 Circle → 10x HP/Dmg + 30% Aura)</span></label>
+    <label><input type="checkbox" id="pk-arms" /> <span>Combined Arms (900g: +5% Atk Spd / unit type)</span></label>
+    <label><input type="checkbox" id="pk-blades" /> <span>Quick Blades I+II (+65% Circle Atk Spd)</span></label>
+    <label><input type="checkbox" id="pk-mail" /> <span>Chainmail (+25% Square HP)</span></label>
+    <label><input type="checkbox" id="pk-bastion" /> <span>Bastion (Hexagon -25% Dmg Taken Aura)</span></label>
+    <label><input type="checkbox" id="pk-chest" /> <span>War Chest (+10% Gold)</span></label>
+  </div>
+
+  <div class="wmao-results" role="status" aria-live="polite">
+    <div class="res-box">
+      <span class="r-kicker">Your Army Value vs. Wave</span>
+      <strong id="res-gold-val">0g vs 508g</strong>
+      <small id="res-troop-cnt">220 troops · 4 types</small>
+    </div>
+    <div class="res-box">
+      <span class="r-kicker">Effective HP &amp; DPS</span>
+      <strong id="res-hp-dps">0 HP · 0 DPS</strong>
+      <small id="res-counter-note">Includes armor &amp; type counters</small>
+    </div>
+    <div class="res-box">
+      <span class="r-kicker">Wave Outcome Estimate</span>
+      <strong id="res-verdict" class="verdict-badge">—</strong>
+      <small id="res-ratio-note">Power ratio: 1.00x</small>
+    </div>
+    <div class="res-box">
+      <span class="r-kicker">Expected Gold Payout</span>
+      <strong id="res-payout">0g – 0g</strong>
+      <small id="res-loss-floor">Loss kill floor (40%): 0g</small>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const UNITS = {
+      0: { name: 'Circle', gold: 1, hp: 10, dmg: 4, interval: 0.7, cat: 'normal', big: false, armN: 1.0, armP: 1.0, armC: 1.0, vs: {} },
+      1: { name: 'Square', gold: 3, hp: 28, dmg: 6, interval: 0.9, cat: 'normal', big: false, armN: 1.0, armP: 0.7, armC: 0.35, vs: { 3: 1.5 } },
+      2: { name: 'Triangle', gold: 3, hp: 12, dmg: 7, interval: 2.47, cat: 'proj', big: false, armN: 1.0, armP: 1.0, armC: 1.0, vs: { 1: 1.75 } },
+      3: { name: 'Diamond', gold: 5, hp: 40, dmg: 11, interval: 1.15, cat: 'cav', big: false, armN: 1.0, armP: 0.55, armC: 1.0, vs: { 2: 1.5 } },
+      4: { name: 'Pentagon', gold: 300, hp: 200, dmg: 10, interval: 6.3, splashMult: 4.5, cat: 'exp', big: true, armN: 1.0, armP: 1.0, armC: 1.0, vs: {} },
+      6: { name: 'Hexagon', gold: 300, hp: 1800, dmg: 14, interval: 1.2, splashMult: 2.4, cat: 'normal', big: true, armN: 0.8, armP: 0.3, armC: 0.3, vs: {} },
+      7: { name: 'Kite', gold: 300, hp: 800, dmg: 30, interval: 0.6, splashMult: 1.6, cat: 'cav', big: true, armN: 1.0, armP: 0.5, armC: 1.0, vs: {} },
+      8: { name: 'Chevron', gold: 1000, hp: 2400, dmg: 400, interval: 2.1, pierceMult: 1.35, cat: 'bolt', big: true, vsBig: 1.5, armN: 1.0, armP: 1.0, armC: 1.0, vs: {} }
+    };
+
+    const LEVELS = [
+      { l: 1, reward: 30, redTarget: 5, gen: 0, placed: { 0: 5 } },
+      { l: 2, reward: 70, redTarget: 56, gen: 0, placed: { 0: 24, 1: 12 } },
+      { l: 3, reward: 120, redTarget: 146, gen: 0, placed: { 0: 100, 1: 20 } },
+      { l: 4, reward: 150, redTarget: 261, gen: 0, placed: { 0: 176, 1: 44 } },
+      { l: 5, reward: 185, redTarget: 508, gen: 0, placed: { 0: 120, 1: 40, 2: 104 } },
+      { l: 6, reward: 225, redTarget: 705, gen: 0, placed: { 0: 208, 1: 64, 2: 90 } },
+      { l: 7, reward: 275, redTarget: 756, gen: 0, placed: { 0: 160, 1: 40, 2: 104, 3: 100 } },
+      { l: 8, reward: 340, redTarget: 853, gen: 0, placed: { 0: 96, 1: 96, 2: 240, 3: 20 } },
+      { l: 9, reward: 420, redTarget: 1152, gen: 0, placed: { 0: 1020, 1: 60, 2: 150 } },
+      { l: 10, reward: 600, redTarget: 1725, gen: 0, city: true, placed: { 0: 188, 1: 528, 2: 80, 3: 48, 4: 2 } },
+      { l: 11, reward: 720, redTarget: 1447, gen: 0, placed: { 0: 604, 1: 230, 2: 263, 3: 180, 4: 2 } },
+      { l: 12, reward: 850, redTarget: 2274, gen: 0, placed: { 0: 3456, 1: 96, 2: 65, 3: 72 } },
+      { l: 13, reward: 990, redTarget: 2128, gen: 0, placed: { 0: 670, 1: 400, 2: 320, 3: 144, 4: 4 } },
+      { l: 14, reward: 1140, redTarget: 3030, gen: 0, placed: { 0: 2304, 1: 768, 3: 220, 4: 2 } },
+      { l: 15, reward: 1300, redTarget: 4620, gen: 0, placed: { 0: 240, 3: 1584, 7: 3 } },
+      { l: 16, reward: 1470, redTarget: 3275, gen: 0, placed: { 0: 744, 1: 426, 2: 900, 3: 96, 4: 4, 6: 1 } },
+      { l: 17, reward: 1650, redTarget: 6957, gen: 0, placed: { 0: 1536, 1: 864, 2: 585, 3: 260, 4: 2, 6: 2, 7: 3 } },
+      { l: 18, reward: 1840, redTarget: 7935, gen: 0, placed: { 0: 2000, 1: 800, 2: 850, 3: 1080, 4: 2, 7: 6 } },
+      { l: 19, reward: 2040, redTarget: 9646, gen: 0, placed: { 0: 2880, 1: 2808, 2: 720, 6: 3 } },
+      { l: 20, reward: 2250, redTarget: 11613, gen: 0, city: true, placed: { 0: 3422, 1: 1204, 2: 944, 3: 498, 4: 8, 6: 2, 7: 2 } },
+      { l: 21, reward: 2470, redTarget: 15394, gen: 0, placed: { 0: 2640, 1: 1200, 2: 882, 3: 1188, 4: 3, 6: 4, 7: 14 } },
+      { l: 22, reward: 2700, redTarget: 17572, gen: 0, placed: { 0: 2812, 1: 2464, 2: 3684, 3: 480, 6: 15 } },
+      { l: 23, reward: 2940, redTarget: 18725, gen: 0, placed: { 0: 2016, 1: 3136, 2: 2464, 3: 432, 4: 14, 6: 8 } },
+      { l: 24, reward: 3190, redTarget: 17298, gen: 0, placed: { 0: 3168, 1: 1728, 2: 1152, 3: 1404, 4: 11, 6: 5, 7: 10, 8: 1 } },
+      { l: 25, reward: 3450, redTarget: 24012, gen: 2, city: true, placed: { 0: 3205, 1: 1344, 2: 1296, 3: 1248, 4: 16, 6: 23, 7: 24, 8: 1 } }
+    ];
+
+    const sel = document.getElementById('wmao-level-select');
+    const enemySumEl = document.getElementById('wmao-enemy-summary');
+    if (!sel) return;
+
+    LEVELS.forEach((lv, idx) => {
+      const opt = document.createElement('option');
+      opt.value = String(idx);
+      const tag = lv.l === 25 ? ' [FINAL BOSS + GENERAL]' : (lv.city ? ' [CITY FORTRESS]' : '');
+      opt.textContent = 'Level ' + lv.l + tag + ' — First Clear ' + lv.reward + 'g (Enemy Value: ' + lv.redTarget.toLocaleString('en-US') + 'g)';
+      if (lv.l === 5) opt.selected = true;
+      sel.appendChild(opt);
+    });
+
+    function calc() {
+      const lv = LEVELS[parseInt(sel.value || '4', 10)] || LEVELS[4];
+      const enemyParts = [];
+      let enemyHP = 0;
+      let enemyDPS = 0;
+      let enemyPlacedGold = 0;
+      let enemyBigShare = 0;
+
+      Object.keys(lv.placed).forEach((k) => {
+        const cnt = lv.placed[k];
+        const u = UNITS[k];
+        if (!u || !cnt) return;
+        enemyParts.push(cnt.toLocaleString('en-US') + ' ' + u.name + (cnt > 1 ? 's' : ''));
+        const gVal = cnt * u.gold;
+        enemyPlacedGold += gVal;
+        if (u.big) enemyBigShare += gVal;
+        enemyHP += cnt * u.hp;
+        const aoe = u.splashMult || u.pierceMult || 1;
+        enemyDPS += cnt * (u.dmg / u.interval) * aoe;
+      });
+      if (lv.gen > 0) {
+        enemyParts.push('Enemy King General');
+        enemyHP += 400;
+        enemyDPS *= 1.18;
+      }
+      enemySumEl.textContent = 'Enemy Field: ' + enemyParts.join(' · ');
+
+      // Player inputs
+      const counts = {};
+      let typesFielded = 0;
+      let totalTroops = 0;
+      let totalGold = 0;
+
+      document.querySelectorAll('[data-uinput]').forEach((inp) => {
+        const uid = parseInt(inp.getAttribute('data-uinput'), 10);
+        const c = Math.max(0, parseInt(inp.value || '0', 10) || 0);
+        counts[uid] = c;
+        if (c > 0) typesFielded++;
+        totalTroops += c;
+        totalGold += c * UNITS[uid].gold;
+      });
+
+      const hasKing = document.getElementById('pk-king').checked && (counts[0] || 0) > 0;
+      const hasArms = document.getElementById('pk-arms').checked;
+      const hasBlades = document.getElementById('pk-blades').checked;
+      const hasMail = document.getElementById('pk-mail').checked;
+      const hasBastion = document.getElementById('pk-bastion').checked && (counts[6] || 0) > 0;
+      const hasChest = document.getElementById('pk-chest').checked;
+
+      const globalAtkSpd = (1 + (hasArms ? typesFielded * 0.05 : 0)) * (hasKing ? 1.15 : 1.0);
+      let playerHP = 0;
+      let playerDPS = 0;
+      let counterNotes = [];
+
+      Object.keys(counts).forEach((k) => {
+        const uid = parseInt(k, 10);
+        const cnt = counts[uid];
+        if (!cnt) return;
+        const u = UNITS[uid];
+        let hpMult = 1.0;
+        let spdMult = globalAtkSpd;
+        if (uid === 0 && hasBlades) spdMult *= 1.65;
+        if (uid === 1 && hasMail) hpMult *= 1.25;
+        if (hasBastion) hpMult *= 1.25;
+
+        // Weighted counter bonus against current enemy wave
+        let typeMult = 1.0;
+        if (enemyPlacedGold > 0) {
+          Object.keys(u.vs).forEach((targetId) => {
+            const eCnt = lv.placed[targetId] || 0;
+            if (eCnt > 0) {
+              const share = (eCnt * UNITS[targetId].gold) / enemyPlacedGold;
+              typeMult += share * (u.vs[targetId] - 1.0);
+              if (share >= 0.15) counterNotes.push(u.name + ' ' + u.vs[targetId] + 'x vs ' + UNITS[targetId].name);
+            }
+          });
+          if (u.vsBig && enemyBigShare > 0) {
+            const bShare = enemyBigShare / enemyPlacedGold;
+            typeMult += bShare * (u.vsBig - 1.0);
+          }
+        }
+
+        // Armor effectiveness vs enemy ranged/cavalry composition
+        const eTriGold = (lv.placed[2] || 0) * 3;
+        const eCavGold = ((lv.placed[3] || 0) * 5) + ((lv.placed[7] || 0) * 300);
+        const projShare = enemyPlacedGold > 0 ? eTriGold / enemyPlacedGold : 0;
+        const cavShare = enemyPlacedGold > 0 ? eCavGold / enemyPlacedGold : 0;
+        const dmgTakenFactor =
+          projShare * u.armP + cavShare * u.armC + Math.max(0, 1 - projShare - cavShare) * u.armN;
+        const effectiveArmorMult = 1 / Math.max(0.35, dmgTakenFactor);
+
+        const aoe = u.splashMult || u.pierceMult || 1;
+        playerHP += cnt * u.hp * hpMult * effectiveArmorMult;
+        playerDPS += cnt * (u.dmg / u.interval) * spdMult * typeMult * aoe;
+      });
+
+      if (hasKing) {
+        playerHP += 90;
+        playerDPS += (40 / 0.7) * globalAtkSpd;
+      }
+
+      // Lanchester combat power index (HP * DPS)
+      const pPower = Math.sqrt(Math.max(0, playerHP * playerDPS));
+      const ePower = Math.sqrt(Math.max(1, enemyHP * enemyDPS));
+      const ratio = pPower / ePower;
+
+      const verdictEl = document.getElementById('res-verdict');
+      let verdict = 'Defeat — Farm Gold';
+      let vClass = 'v-lose';
+      if (ratio >= 1.55) {
+        verdict = '3★ MASTERED (Decisive + Heroic)';
+        vClass = 'v-master';
+      } else if (ratio >= 1.15) {
+        verdict = '2★ DECISIVE CLEAR';
+        vClass = 'v-win';
+      } else if (ratio >= 0.88) {
+        verdict = '1★ Close Victory (Positioning Key)';
+        vClass = 'v-close';
+      }
+      verdictEl.textContent = verdict;
+      verdictEl.className = 'verdict-badge ' + vClass;
+
+      const chestMult = hasChest ? 1.1 : 1.0;
+      const killProgress = Math.min(1.0, ratio * 0.85);
+      const lossKillGold = Math.round(enemyPlacedGold * killProgress * 0.4 * chestMult);
+      const baseClear = Math.round((lv.reward + enemyPlacedGold * 0.4) * chestMult);
+      const masterClear = Math.round((lv.reward * 2.0 + enemyPlacedGold * 0.4) * chestMult);
+
+      document.getElementById('res-gold-val').textContent =
+        totalGold.toLocaleString('en-US') + 'g vs ' + lv.redTarget.toLocaleString('en-US') + 'g';
+      document.getElementById('res-troop-cnt').textContent =
+        totalTroops.toLocaleString('en-US') + ' troops · ' + typesFielded + ' unit type' + (typesFielded === 1 ? '' : 's');
+      document.getElementById('res-hp-dps').textContent =
+        Math.round(playerHP).toLocaleString('en-US') + ' EHP · ' + Math.round(playerDPS).toLocaleString('en-US') + ' DPS';
+      document.getElementById('res-counter-note').textContent =
+        counterNotes.length > 0 ? counterNotes.slice(0, 2).join(' · ') : 'Standard armor & DPS profile';
+      document.getElementById('res-ratio-note').textContent =
+        'Combat Power Ratio: ' + ratio.toFixed(2) + 'x vs Wave ' + lv.l;
+      document.getElementById('res-payout').textContent =
+        baseClear.toLocaleString('en-US') + 'g – ' + masterClear.toLocaleString('en-US') + 'g';
+      document.getElementById('res-loss-floor').textContent =
+        'Even on defeat (~40% kill bounty): ~' + lossKillGold.toLocaleString('en-US') + 'g';
+    }
+
+    sel.addEventListener('change', calc);
+    document.querySelectorAll('[data-uinput], .wmao-perks input').forEach((el) => {
+      el.addEventListener('input', calc);
+      el.addEventListener('change', calc);
+    });
+    calc();
+  })();
+</script>
+
+<style>
+  .wmao-calc {
+    margin: 1rem 0 1.6rem;
+    padding: 1.1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(110, 145, 205, 0.35);
+    background: rgba(18, 24, 34, 0.65);
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .wmao-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 0.45rem;
+  }
+  .wmao-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.18rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(74, 144, 226, 0.2);
+    color: #8bc2ff;
+  }
+  .wmao-subtag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.18rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.07);
+    opacity: 0.85;
+  }
+  .wmao-calc-head h2 {
+    margin: 0 0 0.35rem;
+    font-size: 1.18rem;
+  }
+  .wmao-calc-head p {
+    margin: 0 0 0.9rem;
+    font-size: 0.86rem;
+    line-height: 1.48;
+    opacity: 0.9;
+  }
+  .wmao-wave-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 0.9rem;
+  }
+  .wmao-wave-select {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .wmao-wave-select select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.48rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid rgba(128, 150, 185, 0.45);
+    background: #141923;
+    color: #f0f4fa;
+    font-size: 0.88rem;
+  }
+  .wmao-enemy-summary {
+    font-size: 0.8rem;
+    color: #ff9d9d;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .wmao-unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin-bottom: 0.9rem;
+  }
+  .wmao-unit-card {
+    padding: 0.55rem 0.65rem;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+  .u-top {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+  }
+  .u-top img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .u-top strong {
+    display: block;
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+  .u-top small {
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.75;
+    line-height: 1.25;
+  }
+  .wmao-unit-card input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.38rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 150, 185, 0.4);
+    background: #10151e;
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+  .wmao-perks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.9rem;
+    align-items: center;
+    padding: 0.65rem 0.75rem;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.03);
+    margin-bottom: 0.9rem;
+    font-size: 0.78rem;
+  }
+  .perk-label {
+    font-weight: 700;
+    opacity: 0.85;
+  }
+  .wmao-perks label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
+    cursor: pointer;
+    line-height: 1.35;
+  }
+  .wmao-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 0.65rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .res-box {
+    padding: 0.6rem 0.7rem;
+    border-radius: 7px;
+    background: rgba(10, 14, 20, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.18rem;
+    min-width: 0;
+  }
+  .r-kicker {
+    font-size: 0.71rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.72;
+  }
+  .res-box strong {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+  .res-box small {
+    font-size: 0.72rem;
+    opacity: 0.78;
+    line-height: 1.3;
+  }
+  .verdict-badge.v-master { color: #67e8a5; }
+  .verdict-badge.v-win { color: #7dc4ff; }
+  .verdict-badge.v-close { color: #ffd166; }
+  .verdict-badge.v-lose { color: #ff8585; }
+</style>

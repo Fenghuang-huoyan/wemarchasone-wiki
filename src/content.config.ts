@@ -19,6 +19,7 @@ const pages = defineCollection({
     related: z.array(z.object({ href: z.string(), label: z.string() })),
     banner: z.string(),
     bannerAlt: z.string(),
+    toolsFirst: z.boolean().optional(),
   }),
 });
 

@@ -1,12 +1,12 @@
 {
   "release": "Nov 13, 2026",
-  "price": "Not listed",
-  "priceNote": "is_free is false. The 12 Nov 2026 appdetails payload had no price_overview and an empty package_groups list.",
-  "players": "Single-player",
-  "playersNote": "The only player-mode category on the full-game list. Family Sharing is also listed. No co-op category was present.",
-  "reviews": "Windows",
-  "reviewsNote": "Platforms on 12 Nov 2026: Windows only. Mac and Linux are false. The store page showed no user reviews. The full game was still coming soon.",
-  "modes": "Free demo",
-  "modesNote": "Demo AppID 5403150, release date Oct 19, 2026, is_free true. The full game is_free is false and was still coming soon.",
+  "price": "$7.99 USD",
+  "priceNote": "Full retail release on Steam (AppID 5189160) with a free playable Steam Demo (AppID 5403150).",
+  "players": "8 Playable Units",
+  "playersNote": "Circle (1g), Square (3g), Triangle (3g), Diamond (5g), Pentagon/Hexagon/Kite (300g), and Chevron (1,000g).",
+  "reviews": "62 Skill Nodes",
+  "reviewsNote": "Unpacked from DemoSkillTree in Build #26192930: The King (160g), Combined Arms (900g), and 0.4x defeat kill Gold.",
+  "modes": "4 Game Modes",
+  "modesNote": "50-level Campaign (25 in Demo), Tactics puzzles, Command RTS with 27 abilities, and 10,000-cap Sandbox.",
   "platforms": "Windows"
 }

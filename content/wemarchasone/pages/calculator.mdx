@@ -1,0 +1,62 @@
+---
+title: "We March as One Army Calculator — Wave DPS, Unit Costs & Survival Planner"
+description: "Interactive We March as One army calculator unpacked from Demo Build #26192930: compute exact unit Gold value, counter-DPS, and wave survival across Levels 1–25."
+h1: "We March as One Army & Wave Survival Calculator"
+section: "Calculator"
+order: 1
+toolsFirst: true
+verifiedAgainst: "Unpacked directly from We March as One Demo Build #26192930 (Steam AppID 5403150 · Unity 6000.6.0f1 resources.assets & Assembly-CSharp.dll) on 26 Nov 2026."
+quickAnswer:
+  - "All unit Gold values, HP, attack intervals, armor multipliers, and Levels 1–25 enemy rosters in this calculator are unpacked directly from Demo Build #26192930."
+  - "Core counter triangle: Squares deal 1.5x damage to Diamonds and take 65% less cavalry damage; Triangles deal 1.75x damage to Squares; Diamonds deal 1.5x damage to Triangles and take 45% less arrow damage."
+  - "Even on a defeated attempt, EconomyTuning.unclearedKillGold pays 40% of the Gold value of every enemy unit your army kills before falling."
+  - "Earning DECISIVE (+50%) and MASTERED (+50%) star milestones doubles a stage's base Gold clear reward."
+sources:
+  - label: "Steam Store — We March as One (AppID 5189160)"
+    url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
+  - label: "Steam Demo — We March as One Demo (AppID 5403150, Build #26192930)"
+    url: "https://store.steampowered.com/app/5403150/We_March_as_One_Demo/"
+related:
+  - href: "/units"
+    label: "All 8 Units & Exact Client Stats"
+  - href: "/progression"
+    label: "62-Node Skill Tree Costs & Economy Math"
+  - href: "/guide"
+    label: "Overview Guide"
+banner: "/images/official/steam/ss-00.jpg"
+bannerAlt: "We March as One battlefield deployment screen"
+---
+
+import ArmyWaveCalculator from '@framework/components/ArmyWaveCalculator.astro';
+
+<ArmyWaveCalculator />
+
+## Unpacked Campaign Wave Table (Levels 1–25 · Build `#26192930`)
+
+Every campaign stage in `DemoConfig` (`DemoLevel1` through `DemoLevel25`) defines exact pre-placed enemy formations (`enemyPlacements`), a target enemy army Gold value (`redTarget`), and a first-clear base Gold bounty (`goldReward`). Stages 10, 20, and 25 act as major fortress/boss spikes:
+
+<div class="table-scroll">
+
+| Level | First-Clear Gold (`goldReward`) | Enemy Value (`redTarget`) | Placed Enemy Troops (`enemyPlacements`) | Tactical Counter Note |
+| --- | --- | --- | --- | --- |
+| **Level 1** | 30g | 5g | 5 Circles | Free starter tutorial clash |
+| **Level 2** | 70g | 56g | 24 Circles, 12 Squares | Unlock **Triangles (5g)** to melt Squares at 1.75x |
+| **Level 5** | 185g | 508g | 120 Circles, 40 Squares, 104 Triangles | First heavy archer line—flank with **Diamonds (5g)** |
+| **Level 7** | 275g | 756g | 160 Circles, 40 Squares, 104 Triangles, 100 Diamonds | Brace front line with **Squares** (-65% cavalry dmg) |
+| **Level 10 (City)** | 600g | 1,725g | 188 Circles, 528 Squares, 80 Triangles, 48 Diamonds, **2 Pentagons** | First enemy **Pentagon** artillery (40 range) |
+| **Level 15** | 1,300g | 4,620g | 240 Circles, **1,584 Diamonds**, **3 Kites** | Pure cavalry stampede—stack **Squares** + *Shield Wall* |
+| **Level 16** | 1,470g | 3,275g | 744 Circles, 426 Squares, 900 Triangles, 96 Diamonds, 4 Pentagons, **1 Hexagon** | First enemy **Hexagon** (1,800 HP heavy tank) |
+| **Level 20 (City)** | 2,250g | 11,613g | 3,422 Circles, 1,204 Squares, 944 Triangles, 498 Diamonds, 8 Pentagons, 2 Hexagons, 2 Kites | Multi-gate siege; **Pentagons** (`StructDmg 3.0`) breach walls |
+| **Level 22** | 2,700g | 17,572g | 2,812 Circles, 2,464 Squares, **3,684 Triangles**, 480 Diamonds, **15 Hexagons** | Massive 3,684-archer wall + 15 Hexagons |
+| **Level 24** | 3,190g | 17,298g | 3,168 Circles, 1,728 Squares, 1,152 Triangles, 1,404 Diamonds, 11 Pentagons, 5 Hexagons, 10 Kites, **1 Chevron** | Enemy **Chevron** bolt thrower debuts (400 dmg) |
+| **Level 25 (Boss)** | 3,450g | 24,012g | 3,205 Circles, 1,344 Squares, 1,296 Triangles, 1,248 Diamonds, 16 Pentagons, **23 Hexagons**, **24 Kites**, **1 Chevron** + **Full Enemy General** | Endgame combined-arms test; bring **Chevrons** (1.5x vs Big) |
+
+</div>
+
+## How the Economy & Survival Math Works in Code
+
+From `ShapeWar.EconomyTuning` inside `resources.assets`:
+
+- **Uncleared Defeat / Victory Kill Gold (`unclearedKillGold = 0.40`)**: On any stage you have not cleared yet, every enemy shape you destroy pays **40% of its `goldValue`** (`0.4g` per Circle, `1.2g` per Square/Triangle, `2.0g` per Diamond, `120g` per Pentagon/Hexagon/Kite, `400g` per Chevron), win or lose.
+- **Replay Kill Gold (`killGold = 0.20`)**: Replaying an already cleared level pays **20%** of defeated enemy unit values (`repeatReward = 0.10`).
+- **Star Multipliers (`markHeld = 0.50`, `markMastered = 0.50`)**: Earning **DECISIVE** adds `+50%` bonus Gold, and **MASTERED** (3 stars) adds another `+50%` (further boosted by `+20%` once you unlock the **Mastery** node for `260g`).

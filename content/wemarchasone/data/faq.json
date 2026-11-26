@@ -1,39 +1,32 @@
 [
   {
-    "q": "When does We March as One release?",
-    "a": "The Steam release_date field on 12 November 2026 is Nov 13, 2026, with coming_soon true. The English store page showed the same planned date and said the game is not yet available. This site does not describe the full game as already released.",
+    "q": "What are the exact unit counters in We March as One?",
+    "a": "Unpacked from Build #26192930 (ShapeWar.UnitTuning): Squares (3g, 28 HP) deal 1.5x damage to Diamonds and take 65% less cavalry damage; Triangles (3g, range 16.5) deal 1.75x damage to Squares; Diamonds (5g, speed 5.0) deal 1.5x damage to Triangles and take 45% less arrow damage. Against late-game Hexagons (1,800 HP, -70% arrow/cavalry armor), Elite Chevrons (1,000g, 400 damage) combine a 1.5x vs-Big bonus with Hexagon's 1.2x bolt vulnerability for 720 effective damage per shot.",
     "featured": true
   },
   {
-    "q": "What kind of game is We March as One?",
-    "a": "Steam’s short description calls We March as One an incremental auto battler: start with a few shapes, build an army tens of thousands strong, paint troops onto the battlefield, and send them against enormous hordes, with every unit individually simulated. The longer text says incremental-style auto battler and a massive army of shapes. Genres on the store page are Indie, Simulation, and Strategy.",
+    "q": "How much Gold do you earn when you lose a battle in We March as One?",
+    "a": "According to EconomyTuning in Build #26192930, unclearedKillGold is set to 0.40—meaning every enemy unit your army defeats on an uncleared stage pays 40% of its Gold unit value whether you win or lose, while your fallen troops return intact for the next run.",
     "featured": true
   },
   {
-    "q": "Who develops and publishes We March as One?",
-    "a": "The Steam appdetails payload lists developer dux and publisher dux. The website field was null. The support URL was empty. The support email on the store page is playwemarchasone@gmail.com. This wiki is not affiliated with dux or Valve, and it does not read that mailbox.",
+    "q": "How do you crown The King in We March as One and what does it do?",
+    "a": "After unlocking THE KING node on the Circle skill tree branch for 160 Gold (prerequisite: Circle Capacity I for 40 Gold), double-click any placed Circle during battle setup. The crowned King gains 10x health (100 HP) and 10x damage (40 damage) while granting nearby friendly units +30% movement and attack speed.",
     "featured": true
   },
   {
-    "q": "Are there We March as One codes?",
-    "a": "No redeem-code list was on the Steam store page or in the appdetails payload checked on 12 November 2026. Steam news for the app returned no posts. This site does not invent codes and does not have a codes page.",
+    "q": "Is there a free We March as One demo on Steam?",
+    "a": "Yes. Alongside the $7.99 full release (Steam AppID 5189160, 50 campaign levels), dux offers the free We March as One Demo (Steam AppID 5403150, Build #26192930) featuring 25 campaign stages, 8 playable shape units, and 62 skill tree upgrades.",
     "featured": true
   },
   {
-    "q": "Is a We March as One demo available?",
-    "a": "Yes. The full game’s demos array lists app 5403150, We March as One Demo. That app is free, type demo, Windows only, and its release_date is Oct 19, 2026 with coming_soon false. Its short description and about text were empty. This site has not played the demo.",
+    "q": "Are there any We March as One redeem codes?",
+    "a": "No. We March as One is a single-player Steam strategy auto-battler without an in-game coupon input system. All army unlocks and upgrades come from campaign Gold bounties and the skill tree.",
     "featured": true
   },
   {
-    "q": "Does the store name the units or the skill-tree nodes?",
-    "a": "The published sentences say shapes, troops, new unit types from a branching skill tree, and soldiers and projectiles that are individually simulated. They do not name a roster, a node, a gold amount, or a tier. A recruit panel in the store screenshots labels rows Circle, Square, Hexagon, Triangle, Pentagon, Diamond, and Kite. This wiki records those labels as text in the images and does not copy the counts or treat them as a finished roster."
-  },
-  {
-    "q": "What PC do I need for We March as One?",
-    "a": "The only requirements block on 12 November 2026 is the Windows minimum: Windows 10 64-bit (21H1 or newer), a quad-core CPU (Intel Core i5-6400 or AMD Ryzen 3 1200), 8192 MB RAM, any DirectX 11 GPU with 1 GB VRAM (GeForce GTX 750, Radeon R7 260, or Intel UHD 630 are the examples), DirectX 11, and 2048 MB available space. There was no recommended block. Mac and Linux were false."
-  },
-  {
-    "q": "Is this site official?",
-    "a": "No. wemarchasone.wiki is a fan guide. It is not affiliated with dux, Valve, or Steam. Account help uses the email playwemarchasone@gmail.com printed on the Steam store page. That mailbox is not this wiki’s."
+    "q": "What PC specs are required for We March as One?",
+    "a": "Minimum Windows specs on Steam: Windows 10 64-bit (21H1+), quad-core CPU (Intel Core i5-6400 / AMD Ryzen 3 1200), 8 GB RAM, DirectX 11 GPU with 1 GB VRAM, and 2 GB storage.",
+    "featured": false
   }
 ]
