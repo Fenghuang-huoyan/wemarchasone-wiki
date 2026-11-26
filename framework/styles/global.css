@@ -341,7 +341,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: 0.01em
 .card-art { position: relative; display: block; background: #0e1218; }
 .card-art img {
   width: 100%;
-  height: 11.5rem;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 .door .num, .section-tag {
@@ -640,7 +641,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: 0.01em
 .still-row figure { margin: 0; }
 .still-row img {
   width: 100%;
-  height: 8.4rem;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 14px;
   border: 2px solid var(--line);
