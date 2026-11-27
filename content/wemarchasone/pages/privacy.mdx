@@ -1,17 +1,19 @@
 ---
-title: "Privacy — We March as One Guide"
-description: "Privacy for wemarchasone.wiki, the unofficial We March as One fan guide. Static pages, no accounts, GA4 G-SDWYYDDBP3 on content pages, and an Adsterra Native Banner for this domain only."
-h1: "Privacy for the We March as One guide"
+title: "Privacy Policy — We March as One Guide"
+description: "Privacy policy for wemarchasone.wiki: static fan guide architecture, Google Analytics 4 (_ga cookies), disabled ad slots, and external Steam links."
+h1: "Privacy Policy for the We March as One Guide"
 section: "Privacy"
 order: 11
-verifiedAgainst: "Site policy for wemarchasone.wiki as published in this repository. GA4 G-SDWYYDDBP3 and Adsterra Native Banner enabled with this domain's Get Code."
+verifiedAgainst: "Live repository configuration for wemarchasone.wiki (GA4 G-SDWYYDDBP3 and ads.config.ts disabled) as of 28 Nov 2026."
 quickAnswer:
-  - "wemarchasone.wiki is a static fan guide for We March as One. It has no accounts and does not ask for a Steam login."
-  - "GA4 G-SDWYYDDBP3 loads on content pages. analytics.gaId is set to that measurement id."
-  - "The Adsterra Native Banner after Quick Answer is enabled for this domain only. Zone id 2ce34bb053b2611ca5a433bb647292e7 loads from https://bauval.org/21/2ce34bb053b2611ca5a433bb647292e7."
-  - "The same note is in the footer of every page. The legal disclaimer is a separate page."
+  - "wemarchasone.wiki is a static English fan guide for We March as One with no user accounts, login forms, or password collection."
+  - "Google Analytics 4 (G-SDWYYDDBP3) loads via gtag.js and sets standard first-party _ga cookies to measure aggregated traffic."
+  - "Display ad slots in sites/wemarchasone/ads.config.ts are disabled (enabled: false); no third-party ad network scripts run on any page."
+  - "All Army & Wave Calculator simulations execute locally inside your browser without sending inputs to a server."
 sources:
-  - label: "Steam store — We March as One"
+  - label: "Google Analytics Opt-Out Browser Add-on"
+    url: "https://tools.google.com/dlpage/gaoptout"
+  - label: "Steam Store — We March as One"
     url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
 related:
   - href: "/disclaimer"
@@ -24,28 +26,20 @@ banner: "/images/official/steam/header.jpg"
 bannerAlt: "Official Steam header for We March as One, the full title beside blue cubes meeting red cubes"
 ---
 
-import Callout from '@framework/components/Callout.astro';
+This Privacy Policy describes **wemarchasone.wiki** only. It is not dux’s privacy policy, and it is not Valve or Steam’s.
 
-This page describes **wemarchasone.wiki** only. It is not dux’s privacy policy, and it is not Steam’s.
+## 1. What the Site Stores
 
-## What the site stores
+The site is compiled as static HTML, CSS, and client-side calculator scripts. It does not create user accounts, does not collect passwords, and never asks for your Steam login. All unit counts and perk selections in the Army & Wave Calculator run strictly in browser memory.
 
-The site is a set of static files. It does not create an account, does not take a password, and does not ask for your We March as One or Steam login. There is no comment box and no newsletter form in this version.
+## 2. Analytics & Cookies (`GA4`)
 
-Pages you request are served as ordinary documents. This repository does not add a first-party cookie for tracking.
+`G-SDWYYDDBP3` is configured in `sites/wemarchasone/site.config.ts` and loaded via `googletagmanager.com/gtag/js`. Google Analytics sets first-party cookies (`_ga` and `_ga_*`) in your browser to distinguish anonymous visits and measure aggregated page views. You can block cookies in your browser settings or install the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout).
 
-## Analytics
+## 3. Advertising Status
 
-GA4 `G-SDWYYDDBP3` is set in `analytics.gaId`. The base layout loads that tag on content pages.
+Display advertising in `sites/wemarchasone/ads.config.ts` is **disabled** (`enabled: false`). No `bauval.org` or third-party ad network scripts load on the homepage, guide pages, or 404 page.
 
-## Advertising
+## 4. Outbound Links & Contact
 
-The Native Banner slot after the quick answer is **on** for wemarchasone.wiki. Zone id `2ce34bb053b2611ca5a433bb647292e7` loads from `https://bauval.org/21/2ce34bb053b2611ca5a433bb647292e7` on the homepage and guide pages. No advertising script from another game is included. Adult and sensitive categories stay off. The 404 page does not render a slot.
-
-<Callout kind="note" title="This domain only">
-The measurement id and ad zone on this site were created for wemarchasone.wiki. This repository does not carry a measurement id or an ad zone from any other game site.
-</Callout>
-
-Steam links in the footer are ordinary outbound links. Steam’s own site sets its own cookies once you leave this one. The support address playwemarchasone@gmail.com is the address printed on the Steam page. Mail there is not received by this wiki.
-
-The short version of this note is in the footer under Privacy. Affiliation and trademarks are on the [disclaimer](/disclaimer).
+Links to the Steam store (`store.steampowered.com`) open external pages governed by Valve’s own privacy policy. For editorial corrections or privacy questions regarding **wemarchasone.wiki**, email `malee05050264@gmail.com`. (The developer support address `playwemarchasone@gmail.com` printed on Steam reaches the game developer, not this fan wiki.)

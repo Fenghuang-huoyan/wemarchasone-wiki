@@ -124,11 +124,11 @@
 
   <div class="wmao-perks">
     <span class="perk-label">Skill Tree Modifiers:</span>
-    <label><input type="checkbox" id="pk-king" checked /> <span>The King (160g: 1 Circle → 10x HP/Dmg + 30% Aura)</span></label>
+    <label><input type="checkbox" id="pk-king" checked /> <span>The King (160g: 1 Circle → 10x HP/Dmg + 30% Nearby Aura, ~15% Army Avg)</span></label>
     <label><input type="checkbox" id="pk-arms" /> <span>Combined Arms (900g: +5% Atk Spd / unit type)</span></label>
     <label><input type="checkbox" id="pk-blades" /> <span>Quick Blades I+II (+65% Circle Atk Spd)</span></label>
     <label><input type="checkbox" id="pk-mail" /> <span>Chainmail (+25% Square HP)</span></label>
-    <label><input type="checkbox" id="pk-bastion" /> <span>Bastion (Hexagon -25% Dmg Taken Aura)</span></label>
+    <label><input type="checkbox" id="pk-bastion" /> <span>Bastion (Hexagon -25% Dmg Taken Aura → 1.33x EHP)</span></label>
     <label><input type="checkbox" id="pk-chest" /> <span>War Chest (+10% Gold)</span></label>
   </div>
 
@@ -283,7 +283,7 @@
         let spdMult = globalAtkSpd;
         if (uid === 0 && hasBlades) spdMult *= 1.65;
         if (uid === 1 && hasMail) hpMult *= 1.25;
-        if (hasBastion) hpMult *= 1.25;
+        if (hasBastion) hpMult /= 0.75;
 
         // Weighted counter bonus against current enemy wave
         let typeMult = 1.0;

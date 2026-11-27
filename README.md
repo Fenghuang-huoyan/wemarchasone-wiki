@@ -2,7 +2,7 @@
 
 Unofficial English fan guide for [We March as One](https://store.steampowered.com/app/5189160/We_March_as_One/) (Steam AppID **5189160**), aimed at **wemarchasone.wiki**.
 
-Not affiliated with dux, Valve, or Steam. The site does not sell the game or recover accounts. On 12 Nov 2026 the full game was still marked coming soon for Nov 13, 2026.
+Not affiliated with dux, Valve, or Steam. The site does not sell the game or recover accounts. Unit stats, armor multipliers, and wave compositions are unpacked from Demo Build #26192930.
 
 ## Build
 
@@ -26,6 +26,6 @@ Node 22. The build is a static Astro site (`dist/`). `astro.config.mjs` sets `si
 | Content | `content/wemarchasone/` | Guide pages and JSON |
 | Routes | `src/pages/` | Home, guide slug, 404 |
 
-`analytics.gaId` is an empty string, so the base layout does not load Google Analytics. The Adsterra Native Banner after Quick Answer is disabled. See [ADS.md](ADS.md).
+`analytics.gaId` is `G-SDWYYDDBP3`, so the base layout loads Google Analytics 4 via gtag. The Adsterra Native Banner slot in `sites/wemarchasone/ads.config.ts` is disabled (`enabled: false`). See [ADS.md](ADS.md).
 
 Steam art lives in `public/images/official/steam/` with `ATTRIBUTION.txt`. This repository does not buy a domain, edit DNS, or deploy. Vercel can serve the static `dist/` output.

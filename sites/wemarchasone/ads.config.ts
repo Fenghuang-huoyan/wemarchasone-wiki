@@ -24,7 +24,7 @@ const slots = {
 
 export const adsConfig = {
   network: 'adsterra' as const,
-  enabled: true,
+  enabled: false,
   invokeBase: '',
   /** Site-wide full script URL. A slot `scriptSrc` overrides this. */
   scriptSrc: 'https://bauval.org/21/2ce34bb053b2611ca5a433bb647292e7',

@@ -33,7 +33,7 @@ export const siteConfig = {
     format: 'native-banner' as const,
   },
   disclaimer:
-    'wemarchasone.wiki is an unofficial fan-made guide for We March as One. It is not affiliated with, endorsed by, or sponsored by dux, Valve, or Steam. All game content, names, artwork, and trademarks belong to their respective owners. The full game was still marked coming soon on the date these pages were checked. This site does not sell the game, redeem codes, or recover accounts. The email in the footer is the support address printed on the Steam store page. This wiki does not read that mailbox.',
+    'wemarchasone.wiki is an unofficial fan-made guide for We March as One. It is not affiliated with, endorsed by, or sponsored by dux, Valve, or Steam. All game content, names, artwork, and trademarks belong to their respective owners. Unit and wave numbers are verified against Demo Build #26192930 and official Steam store records. This site does not sell the game, redeem codes, or recover accounts. The developer email listed on Steam belongs to dux; this wiki does not read that mailbox.',
   nav: [
     { href: '/', label: 'Home' },
     { href: '/calculator', label: 'Calculator' },
