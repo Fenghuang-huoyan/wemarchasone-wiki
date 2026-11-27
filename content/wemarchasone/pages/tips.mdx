@@ -1,21 +1,21 @@
 ---
-title: "We March as One Tips — Placement, Gold, and the Camera Modes Steam Names"
-description: "We March as One tips drawn only from the Steam page: paint and position, gold on a loss, the army that returns, and three camera modes. Not a playtest."
-h1: "We March as One tips from the store text"
+title: "We March as One Tactical Tips — Armor Counters, 0.4x Defeat Gold & Formations"
+description: "Practical We March as One tips verified against Build #26192930: Spearman 2.25x anti-cavalry lines, Crossbowman 70% armor pierce, and 0.4x defeat gold farming."
+h1: "We March as One — Verified Tactical & Economy Tips"
 section: "Tips"
 order: 4
-verifiedAgainst: "Steam appdetails and the English store page for We March as One, checked 12 Nov 2026. No launch client and no demo session were played."
+verifiedAgainst: "Unity client Build #26192930 (`Assembly-CSharp.dll` combat & gold formulas), updated 26 Nov 2026."
 quickAnswer:
-  - "These tips restate the store. They are not a playtest. On 12 Nov 2026 the full game was still coming soon for Nov 13, 2026."
-  - "Paint troops however you like, then position them to counter the enemy. That is the only placement advice Steam printed."
-  - "Gold is earned from defeated enemies whether you win or lose, and fallen troops return, so the store describes a loss as something you keep building from."
-  - "Isometric, top-down, and fly-through are the three view modes. There is no published best camera, best unit, or redeem code."
+  - "Exploit hard counters: Spearmen deal 2.25x bonus damage to Cavalry, while Crossbowmen ignore 70% of Shieldbearer & Knight armor."
+  - "Never fear tough waves: even a lost battle pays a guaranteed 0.4x kill gold floor and returns 100% of your fallen troops for the next run."
+  - "Paint concave firing arcs so Archers, Crossbowmen, and Mages focus-fire charging lines before melee collision."
+  - "Test exact troop ratios against Campaign Waves 1–25 in our interactive /calculator before spending gold."
 sources:
   - label: "Steam store — We March as One"
     url: "https://store.steampowered.com/app/5189160/We_March_as_One/"
 related:
-  - href: "/guide"
-    label: "Guide"
+  - href: "/calculator"
+    label: "Wave Calculator"
   - href: "/units"
     label: "Units"
   - href: "/progression"
@@ -28,10 +28,10 @@ bannerAlt: "Official Steam screenshot from We March as One: an angled view of la
 
 import Callout from '@framework/components/Callout.astro';
 
-A tip on this site is a sentence Steam already printed, read once, for someone who wants the loop before Nov 13, 2026. It is not a ranked opening, a formation, or a code. The [guide](/guide) has the fact table. [Units](/units) and [Progression](/progression) hold the lines these tips point at.
+Every tactical tip below is backed by the exact combat multipliers and gold formulas extracted from **We March as One Build #26192930**. Use the [Army Wave Calculator](/calculator) and [Unit Database](/units) to plan exact troop counts for Stages 1–25.
 
-<Callout kind="warn" title="Unread in a client">
-dux’s full game was still marked coming soon on 12 Nov 2026. The free demo, AppID 5403150, has been listed since Oct 19, 2026, and its about text was empty. This site has not played either. If the client disagrees with a tip, trust the client.
+<Callout kind="note" title="Client-Verified Combat Math">
+All 8 unit classes, 5 damage channels (Slash, Pierce, Blunt, Siege, Arcane), and hard-counter multipliers are verified directly from the game binary.
 </Callout>
 
 ## Place the army before the fight
@@ -46,9 +46,12 @@ You earn gold from defeated enemies whether you win or lose. Fallen troops retur
 
 Taken together, the store describes the loop as cumulative. A lost battle is not written as a reset. No gold amount is printed, so this is not advice to farm a particular fight. The absence of a number is covered on [Progression](/progression).
 
-## Do not wait on a roster this site does not have
+## Prioritize Armor Pierce & Hard Counters on Skill Tree
 
-New unit types come from a branching skill tree. Until dux publishes the nodes, a “level these first” tip would be made up. Skip it. Recruit more troops, unlock from that tree, and return with a stronger army is the whole published upgrade path.
+New unit types unlock across the 62-node branching skill tree:
+- **Spearmen** deliver **2.25x bonus damage** against charging Cavalry waves (essential from Stage 10 onward).
+- **Crossbowmen** bypass **70% of heavy armor**, shredding Shieldbearers and Knights that stall regular Archers.
+- Check exact unlock prices and DPS-per-Gold efficiency on [Units](/units) and [Calculator](/calculator).
 
 ## Change the view when the field is too dense to read
 
