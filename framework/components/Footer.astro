@@ -45,8 +45,8 @@ const adsOn = Object.values(adsConfig.slots).some((slot) => {
           ? 'Google Analytics is enabled with the measurement id in site config.'
           : 'Google Analytics is not loaded, because analytics.gaId is empty.'}
         {adsOn
-          ? ' A labeled Adsterra placement loads where a zone key is set.'
-          : ' Advertisements are not loaded, because the Adsterra Native Banner zone key is still empty.'}
+          ? ' A labeled advertisement slot loads on content pages.'
+          : ' Third-party display advertisements are disabled.'}
       </p>
       <p>© {year} {siteConfig.domain}. {siteConfig.gameTitle} © {siteConfig.publisher}. Steam AppID {siteConfig.steamAppId}.</p>
     </div>
